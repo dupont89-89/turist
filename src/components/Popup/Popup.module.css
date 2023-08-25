@@ -1,0 +1,25 @@
+.modal .content h2,
+.modal .content h3,
+.modal .content h4 {
+    margin: 25px 0;
+}
+.modal .content h2 {
+    font-size: 1.75rem;
+}
+.modal .content h3 {
+    font-size: 1.55rem;
+}
+.modal .content h4 {
+    font-size: 1.65rem;
+}
+.modal .content p {
+    margin: 14px 0;
+    font-size: 1rem;
+}
+.modal {
+    border-radius: 30px;
+    padding: 50px;
+}
+.closeBtnPopup {
+    text-align: right;
+}

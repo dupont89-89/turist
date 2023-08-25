@@ -1,0 +1,9 @@
+.formSity {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+}
+.formSity ul {
+    height: 100px;
+    overflow: auto;
+}

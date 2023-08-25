@@ -1,16 +1,15 @@
 import './App.css';
-import { Footer } from './components/Footer/Footer';
+import React from 'react'
+import Header from './components/Header/Header';
+import TourCatalog from './components/TourCatalog/TourCatalog';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <p>ХЕДЕР</p>
-      </header>
-      <section>
-        Тело
-      </section>
-      <footer><Footer /></footer>
+      <Header />
+      <div className='wrapperContent'>
+        <TourCatalog />
+      </div>
     </div>
   );
 }

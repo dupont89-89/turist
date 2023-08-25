@@ -1,0 +1,8 @@
+.contentCartTours {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-gap: 20px;
+    max-width: 930px;
+    margin: 0 auto;
+    align-items: start;
+}

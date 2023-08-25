@@ -1,0 +1,189 @@
+.cartBlock {
+    position: relative;
+    display: block;
+    border-radius: 20px;
+    border: 2px solid #FFF;
+    background: #FFF;
+    color: #000;
+    box-shadow: 0px 5px 20px rgba(90, 113, 208, 0.16);
+    margin: 20px 0;
+    padding: 20px;
+}
+.linkRegions span {
+    background-image: url(../../assets/images/cartTours/gps_place_marker_pointer_location_pin_map_navigation_direction_icon_195752.svg);
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 3px;
+}
+.linkRegions span:last-child {
+    background-image: url(../../assets/images/cartTours/right_icon-icons.com_61212.svg);
+}
+.linkRegions {
+    display: inline-block;
+    margin-right: 10px;
+    color: #91A7C0;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.dataTours {
+    font-size: 1rem;
+}
+.dataTours span {
+    background-image: url(../../assets/images/cartTours/calendar-with-a-clock-time-tools_icon-icons.com_56831.svg);
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 3px;
+}
+.nameUser a {
+    font-size: 1.2rem;
+    color: #000;
+}
+.nameUser, .userTrust, .regionUser {
+    margin-bottom: 25px;
+}
+.regionUser {
+    font-size: 1rem;
+    color: #000;
+}
+.userAvatar img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.fotoTours img {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.descriptionTours {
+    font-size: 0.875rem;
+    color: #000;
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3;
+   -webkit-box-orient: vertical;
+}
+.buttonItemTours a {
+    background-color: #FFC107;
+    color: #000;
+    display: inline-block;
+    border-radius: 8px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+.userTrust button {
+    font-size: 0.875rem;
+    padding: 7px 15px;
+    background-color: rgb(12, 62, 136);
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+}
+.userTrust a {
+    color: #ffffff;
+}
+.goalsUserBlock {
+    font-size: 1.075rem;
+    font-weight: 500;
+    color: #d54416;
+    margin-top: 15px;
+}
+.goalsUser {
+    text-decoration: underline;
+    color: #000;
+}
+.descriptionFotoTours {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+.descriptionCartBlock {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+.blockDataTours {
+    margin: 30px 0;
+}
+.blockIconTours {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
+.iconTours img {
+    width: 33px;
+}
+.rightIcon  {
+    background-image: url(../../assets/images/cartTours/ToursSearchUser/icon-arrow-right-7422005.png);
+    background-size: 20px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.leftBlockCartList .blockIconTours {
+    margin-top: 20px;
+}
+.blockDescriptionCartList {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 15px;
+    align-items: start;
+}
+.iconTransportUserBlock img {
+    width: 25px;
+    margin-right: 5px;
+}
+.transportUserBlock {
+    color: #d54416;
+    font-size: 17px;
+}
+.iconTransportUserBlock img {
+    width: 25px;
+    margin-right: 5px;
+}
+.blockTransport {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-top: 15px;
+}
+.linkBtnCartList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    justify-items: stretch;
+    margin: 50px 0;
+}
+.buttonItemTours {
+    display: grid;
+    justify-items: end;
+}
+.linkItemTours img {
+    width: 25px;
+}
+.linkItemTours a {
+    font-size: 16px;
+    color: #ef4d4d;
+    display: grid;
+    align-items: center;
+    align-content: center;
+    grid-template-columns: 21px 1fr;
+    justify-content: start;
+    justify-items: start;
+    grid-gap: 5px;
+}
