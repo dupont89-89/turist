@@ -1,5 +1,5 @@
 import React, { Children } from 'react'
-import s from '../Buttons/ButtonStandart.module.css'
+import s from './Button.module.css'
 
 export default function ButtonStandart(props) {
   return (

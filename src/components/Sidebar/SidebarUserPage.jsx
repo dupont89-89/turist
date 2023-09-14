@@ -5,12 +5,12 @@ import SidebarToursListTwoBlock from './SidebarItemToursList/SidebarToursListTwo
 import SidebarToursListThreeBlock from './SidebarItemToursList/SidebarToursListThreeBlock'
 import SidebarToursListFourthBlock from './SidebarItemToursList/SidebarToursListFourthBlock'
 
-export default function SidebarToursList(props) {
+export default function SidebarUserPage(props) {
     return (
         <div className={s.sidebar}>
             <SidebarToursListOneBlock />
             <SidebarToursListTwoBlock />
-            <SidebarToursListThreeBlock />
+            <SidebarToursListThreeBlock/>
             <SidebarToursListFourthBlock />
         </div>
     )

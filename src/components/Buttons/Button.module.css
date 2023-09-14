@@ -1,0 +1,17 @@
+.s.buttonStandart {
+  display: inline-block;
+  background-color: antiquewhite;
+  color: black;
+  font-size: 1rem;
+}
+
+.buttonAction {
+  background-color: #FFC107;
+  color: #000;
+  display: inline-block;
+  border-radius: 8px;
+  padding: 10px 30px;
+  font-size: 16px;
+  border: 2px solid #f4b803;
+  cursor: pointer;
+}

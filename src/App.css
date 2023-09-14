@@ -90,6 +90,7 @@ video {
 
 html {
   height: 101%;
+  overflow-x: hidden;
 }
 
 /* always display scrollbars */
@@ -97,6 +98,7 @@ body {
   font-size: 62.5%;
   line-height: 1;
   font-family: 'Geologica', sans-serif;
+  background-color: #f6f7f7;
 }
 
 article,
@@ -164,4 +166,11 @@ ul {
 .wrapperContent {
   max-width: 1240px;
   margin: auto;
+}
+.headerBackground {
+  background: url(/src/assets/images/header/mountains-in-the-background.jpg); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 450px;
 }
