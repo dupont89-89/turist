@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import s from '../Header.module.css';
 import { Link } from 'react-router-dom';
-import { BoxMenuNew } from './BoxMenu/BoxMenuNew';
-import { BoxMenuBlog } from './BoxMenu/BoxMenuBlog';
 import { BoxMenuTime } from './BoxMenu/BoxMenuTime';
 import { BoxMenuHuman } from './BoxMenu/BoxMenuHuman';
 import { BoxMenuContry } from './BoxMenu/BoxMenuContry';
@@ -46,35 +44,33 @@ export default function Menu(props) {
                     <span className={`${s.iconMenuContry} ${s.iconMenu}`}></span>
                     <span className={s.textLink}>Направления</span>
                 </Link>
-                {activeComponent === "contry" && <BoxMenuContry />}
+                {activeComponent === "contry" && <BoxMenuContry handleLinkClick={handleLinkClick} />}
             </div>
             <div className={s.itemMenu}>
                 <Link onClick={() => handleLinkClick("human")} to="/#3">
                     <span className={`${s.iconMenuHuman} ${s.iconMenu}`}></span>
                     <span className={s.textLink}>Кого ищем</span>
                 </Link>
-                {activeComponent === "human" && <BoxMenuHuman />}
+                {activeComponent === "human" && <BoxMenuHuman handleLinkClick={handleLinkClick} />}
             </div>
             <div className={s.itemMenu}>
                 <Link onClick={() => handleLinkClick("time")} to="/#4">
                     <span className={`${s.iconMenuTime} ${s.iconMenu}`}></span>
                     <span className={s.textLink}>Когда в путь</span>
                 </Link>
-                {activeComponent === "time" && <BoxMenuTime />}
+                {activeComponent === "time" && <BoxMenuTime handleLinkClick={handleLinkClick} />}
             </div>
             <div className={s.itemMenu}>
-                <Link onClick={() => handleLinkClick("blog")} to="/#5">
+                <Link to="/blog/">
                     <span className={`${s.iconMenuBlog} ${s.iconMenu}`}></span>
                     <span className={s.textLink}>Отчеты пользователей</span>
                 </Link>
-                {activeComponent === "blog" && <BoxMenuBlog />}
             </div>
             <div className={s.itemMenu}>
-                <Link onClick={() => handleLinkClick("new")} to="/#6">
+                <Link to="/newtur">
                     <span className={`${s.iconMenuNew} ${s.iconMenu}`}></span>
                     <span className={s.textLink}>Последние публикации</span>
                 </Link>
-                {activeComponent === "new" && <BoxMenuNew />}
             </div>
         </div>
     );

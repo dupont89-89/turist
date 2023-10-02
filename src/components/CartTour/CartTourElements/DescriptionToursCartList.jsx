@@ -8,13 +8,12 @@ export default function DescriptionToursCartList(props) {
         <div>
             <div className={s.descriptionTours}>
                 <p>
-                    Люблю прогулки, походы, общение. Предлагаю провести время совместно с компанией/человеком/парой.
-                    Выезжаю из Челябинска в Крым на своей машине 29.06.2023, можно ехать вместе
+                {props.descriptionText}
                 </p>
             </div>
             <div>
-                <GoalsUserToursCartList />
-                <TransportUserToursCartList />
+                <GoalsUserToursCartList goal={props.goal} />
+                <TransportUserToursCartList transport={props.transport} />
             </div>
         </div>
     )

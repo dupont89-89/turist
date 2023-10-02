@@ -173,16 +173,26 @@
     justify-items: end;
 }
 .linkItemTours img {
-    width: 25px;
+    width: 30px;
 }
 .linkItemTours a {
-    font-size: 16px;
-    color: #ef4d4d;
-    display: grid;
-    align-items: center;
-    align-content: center;
-    grid-template-columns: 21px 1fr;
-    justify-content: start;
-    justify-items: start;
-    grid-gap: 5px;
+    display: inline-block;
+    position: relative;
+}
+.numberWish {
+    position: absolute;
+    color: #fff;
+    font-size: 13px;
+    top: 14px;
+    left: 8px;
+    z-index: 2;
+}
+.linkItemTours img {
+    position: relative;
+    z-index: 1;
+    top: 8px;
+    margin-right: 10px;
+}
+.linkWichColor {
+    color: #ef5252;
 }

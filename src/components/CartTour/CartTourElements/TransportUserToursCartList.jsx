@@ -5,17 +5,26 @@ import iconAuto from '../../../assets/images/cartTours/IconTransport/icon-suv-ca
 import iconTrain from '../../../assets/images/cartTours/IconTransport/icon-train-1974098.png'
 
 export default function TransportUserToursCartList(props) {
+  
+  const { transport } = props; // Предполагается, что transport - это массив из пропсов
+
   return (
     <div className={s.blockTransport}>
-      <div className={s.transportUserBlock}>
-        Транспорт:
-      </div>
+      <div className={s.transportUserBlock}>Транспорт:</div>
       <div className={s.iconTransportUserBlock}>
-        <img src={iconAir} alt="Самолётом" title="Самолётом" />
-        <img src={iconAuto} alt="Автомобилем" title="Автомобилем"/>
-        <img src={iconTrain} alt="Поездом" title="Поездом"/>
+        {transport.train && (
+          <img src={iconTrain} alt="Поездом" title="Поездом" />
+        )}
+        {transport.air && (
+          <img src={iconAir} alt="Самолётом" title="Самолётом" />
+        )}
+        {transport.car && (
+          <img src={iconAuto} alt="Автомобилем" title="Автомобилем" />
+        )}
+        {/* {transport.bicycle && (
+          <img src={iconBicycle} alt="Велосипедом" title="Велосипедом" />
+        )} */}
       </div>
     </div>
-
-  )
+  );
 }

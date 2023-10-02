@@ -4,6 +4,23 @@ header h1 {
   text-align: center;
   width: 500px;
 }
+.btnNewTours {
+  background-color: #FFC107;
+    font-size: 2rem;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.btnNewTours:hover {
+     background-color: #e99a10;
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+    transition: all 0.3s ease-out;
+}
+header {
+  height: 450px;
+}
 
 .h1 {
   display: flex;
@@ -79,7 +96,7 @@ header h1 {
 
 .menuBlockHeader {
   display: grid;
-  grid-gap: 15px;
+  grid-gap: 48px;
   grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
   align-items: stretch;
   justify-items: center;
@@ -173,4 +190,27 @@ header h1 {
   background-color: #ffc725;
   border: 1px solid;
   cursor: pointer;
+}
+.gridHeaderRowTwo {
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  grid-gap: 30px;
+  align-items: center;
+}
+.iconUser img {
+  border-radius: 50%;
+  border: #fff solid;
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  text-align: center;
+}
+.iconUser, .name {
+  text-align: center;
+}
+.name span {
+  font-size: 1rem;
+  color: #fff;
+  margin-top: 15px;
+  display: block;
 }
