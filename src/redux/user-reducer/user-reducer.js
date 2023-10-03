@@ -7,9 +7,7 @@ export const setDataProfile = (user) => ({
 });
 
 export const getUserClerk = (userId) => {
-  debugger;
   return (dispatch) => {
-    debugger;
     getUser(userId).then(response => {
       dispatch(setDataProfile(response));
     });

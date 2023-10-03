@@ -24,7 +24,9 @@ if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
 
+
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+const secretKey = process.env.CLERK_SECRET_KEY;
 
 function App() {
   
@@ -32,7 +34,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <ClerkProvider navigate={(to) => navigate(to)} publishableKey={clerkPubKey} >  
+    <ClerkProvider navigate={(to) => navigate(to)} publishableKey={clerkPubKey} >
       <SignedIn>
         <Welcome dispatch={dispatch} /> {/* Передаем dispatch как prop */}
       </SignedIn>
@@ -58,14 +60,15 @@ function App() {
 }
 
 function Welcome({ dispatch }) { // Принимаем dispatch как параметр
+  
   const { user } = useUser();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     const userId = user.id;
-  //     dispatch(getUserClerk(userId)); // Используем dispatch для вызова действия
-  //   }
-  // }, [user, dispatch]);
+  useEffect(() => {
+    if (user) {
+      const userId = user.id;
+      dispatch(getUserClerk(userId)); // Используем dispatch для вызова действия
+    }
+  }, [user, dispatch]);
 
   return (
     <div>

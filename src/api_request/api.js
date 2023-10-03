@@ -18,13 +18,6 @@ if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
 
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
-const instanceUser = axios.create({
-  baseURL: 'https://clean-penguin-8.clerk.accounts.dev/v1',
-  headers: {
-    Authorization: `Bearer ${clerkPubKey}`,
-  },
-});
-
 // const { getToken } = useAuth();
 
 // const instanceUser = axios.create({
@@ -48,14 +41,34 @@ export const newSetDataTours = async (newTours) => {
   }
 };
 
-export const getUser = async (userId) => {
-  try {
-    const response = await instanceUser.get(`/users/${userId}`);
-    debugger;
-    return response;
-  } catch (error) {
-    console.error("Axios Error:", error);
-    throw error;
+const options = {
+  headers: {
+    Accept: "*/*",
+    Authorization: `Bearer ${clerkPubKey}`
   }
 };
-  
+
+// const instanceUser = axios.create({
+//   baseURL: 'https://clean-penguin-8.clerk.accounts.dev/v1',
+//   headers: {
+//     Accept: "*/*",
+//     Authorization: `Bearer ${clerkPubKey}`,
+//   },
+// });
+
+const instanceUser = axios.create({
+  headers: {
+    Accept: "*/*",
+    Authorization: `Bearer ${clerkPubKey}`,
+  },
+});
+
+export const getUser = async (userId) => {
+    const response = await instanceUser.get(`/users/${userId}`, options);
+    return response;
+};
+
+// export const getUser = async (userId) => {
+//   const response = await axios.get(`https://clean-penguin-8.clerk.accounts.dev/v1/users/${userId}`, options)
+//   return response;
+// };
