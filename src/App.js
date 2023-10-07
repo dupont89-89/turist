@@ -26,7 +26,6 @@ if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
 
 
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-const secretKey = process.env.CLERK_SECRET_KEY;
 
 function App() {
   
@@ -59,16 +58,9 @@ function App() {
   );
 }
 
-function Welcome({ dispatch }) { // Принимаем dispatch как параметр
+function Welcome() { 
   
   const { user } = useUser();
-
-  useEffect(() => {
-    if (user) {
-      const userId = user.id;
-      dispatch(getUserClerk(userId)); // Используем dispatch для вызова действия
-    }
-  }, [user, dispatch]);
 
   return (
     <div>

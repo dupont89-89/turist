@@ -32,9 +32,23 @@ export const getSity = async () => {
   return response;
 };
 
+// export const newSetDataTours = async (newTours) => {
+//   debugger;
+//   try {
+//     const response = await instance.post('/newsetdatatours', newTours);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
 export const newSetDataTours = async (newTours) => {
   try {
-    const response = await instance.post('/newsetdatatours', newTours);
+    const formData = new FormData();
+    for (const key in newTours) {
+      formData.append(key, newTours[key]);
+    }
+    const response = await instance.post('/newsetdatatours', formData);
     return response.data;
   } catch (error) {
     throw error;

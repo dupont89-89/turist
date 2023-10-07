@@ -1,6 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const multer = require('multer');
+const fs = require('fs');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Указываем папку для сохранения изображений
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname); // Генерируем уникальное имя файла
+  },
+});
+
+const upload = multer({ storage });
 
 const app = express();
 // Использование middleware
@@ -10,12 +23,6 @@ app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true, // Разрешение использовать учетные данные в запросах
 }));
-
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   res.setHeader('Access-Control-Allow-Credentials', 'true');
-//   next();
-// });
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -36,24 +43,6 @@ mongoose.connect('mongodb://localhost:27017/tourist-db', {
     console.error('Error connecting to MongoDB:', error);
   });
 
-// Schema для пользователей
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
-const User = mongoose.model('users', UserSchema);
-
 // Schema и модель для тура
 const ToursSchema = new mongoose.Schema({
   id: String,
@@ -68,7 +57,10 @@ const ToursSchema = new mongoose.Schema({
   isSeekingFemale: Boolean,
   isGroup: Boolean,
   text: String,
-  images: String,
+  images: {
+    data: Buffer, // Тип Buffer для хранения бинарных данных файла
+    contentType: String, // Тип файла, например, "image/jpeg" или "image/png"
+  },
   goal: String,
   day: Number,
   month: Number,
@@ -80,6 +72,9 @@ const ToursSchema = new mongoose.Schema({
   places: [String],
   Ihave: Boolean,
   total: Number,
+  selectedOptionData: String,
+  start_date: Date,
+  end_date: Date,
   date: {
     type: Date,
     default: Date.now,
@@ -93,33 +88,27 @@ app.get('/', (req, res) => {
   res.send('App is Working');
 });
 
-// Роут для регистрации пользователей
-app.post('/register', async (req, res) => {
-  try {
-    const user = new User(req.body);
-    let result = await user.save();
-    result = result.toObject();
-    if (result) {
-      delete result.password; // Предположим, что у вас есть поле password в объекте
-      res.send(req.body);
-      console.log(result);
-    } else {
-      console.log('User already registered');
-    }
-  } catch (e) {
-    res.status(500).send('Something Went Wrong');
-  }
-});
-
 // Роут для добавления данных о туристах
-app.post('/newsetdatatours', async (req, res) => {
+app.post('/newsetdatatours', upload.single('images'), async (req, res) => {
   try {
     const tourData = req.body;
     if (!tourData) {
       return res.status(400).send('Invalid data format');
     }
 
-    const newTouristData = new Tours(req.body);
+    // Получите путь к загруженному файлу
+    const imagePath = req.file.path;
+
+    // Создайте объект для поля "images"
+    const imageObject = {
+      data: fs.readFileSync(imagePath), // Читаем изображение в бинарном формате
+      contentType: req.file.mimetype, // Указываем тип контента из заголовка файла
+    };
+
+    // Добавьте объект "images" к данным
+    tourData.images = imageObject;
+
+    const newTouristData = new Tours(tourData);
     let result = await newTouristData.save();
     result = result.toObject();
     if (result) {
@@ -133,10 +122,7 @@ app.post('/newsetdatatours', async (req, res) => {
     res.status(500).send('Something Went Wrong');
   }
 });
-
 // Запуск сервера на порту 5000
 app.listen(5000, () => {
   console.log('App is listening on port 5000');
 });
-
-
