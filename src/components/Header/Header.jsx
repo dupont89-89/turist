@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import s from '../Header/Header.module.css'
 import Menu from './Menu/Menu'
 import { Link } from 'react-router-dom'
 import { useUser } from "@clerk/clerk-react";
-import userFoto from './../../assets/images/User/51e01397234b5a76a923e66592d4f654.jpg'
 
 export default function Header(props) {
 
-  const {user } = useUser();
+  const {user} = useUser();
 
   return (
     <header>
@@ -21,7 +20,10 @@ export default function Header(props) {
         </div>
         <div className={s.helloName}>
           <div className={s.iconUser}>
-            <img src={userFoto} alt="" />
+          {user ? (
+        <div><img src={user.imageUrl} alt="" /></div>
+      ) : <button>Вход/Регистрация</button>}
+            
           </div>
           <div className={s.name}>
           <span>Привет, {user && user.firstName} {user && user.lastName}</span>

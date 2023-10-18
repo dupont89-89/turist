@@ -8,8 +8,18 @@ import { registerLocale, setDefaultLocale } from "react-datepicker";
 import ruLocale from 'date-fns/locale/ru'; // Импортируйте локализацию напрямую из date-fns
 import { useUser } from "@clerk/clerk-react";
 import { Formik, Field, Form } from 'formik';
-import { startOfDay, endOfDay } from 'date-fns';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import { utcToZonedTime } from 'date-fns-tz';
+import FileDragAndDropField from '../Formik/Index';
+import NotificationPopup from '../Popup/NotificationPopup';
+import iconTrain from '../../assets/images/cartTours/IconTransport/icon-train-821405.png'
+import iconAir from '../../assets/images/cartTours/IconTransport/icon-aeroplane-223465.png'
+import iconCar from '../../assets/images/cartTours/IconTransport/icon-suv-4391528.png'
+import iconBike from '../../assets/images/cartTours/IconTransport/icon-mountain-bike-1947489.png'
+import iconFoot from '../../assets/images/cartTours/IconTransport/icon-hiking-5987640.png'
+
+
 
 registerLocale('ru', ruLocale); // Используйте 'ru' вместо 'ru_RU'
 setDefaultLocale('ru');
@@ -19,7 +29,8 @@ export default function NewTours(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const { isLoaded, isSignedIn, user } = useUser();
-    const [selectedImages, setSelectedImages] = useState([]);
+    const [showNotification, setShowNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
     const timeZone = 'Europe/Moscow'; // Замените на нужный часовой пояс
 
     useEffect(() => {
@@ -38,6 +49,28 @@ export default function NewTours(props) {
         return null;
     }
 
+    const goals = [
+        { id: 'goalGrup', value: 'Собрать свою группу', label: 'Собрать свою группу' },
+        { id: 'goalExurs', value: 'Совместные экскурсии', label: 'Совместные экскурсии' },
+        { id: 'goalSearch', value: 'Поиск единомышленников', label: 'Поиск единомышленников' },
+        { id: 'goalSex', value: 'Флирт-секс', label: 'Флирт-секс' },
+        { id: 'goalEntertainments', value: 'Совместные развлечения', label: 'Совместные развлечения' },
+        { id: 'goalGroupJoining', value: 'Присоединиться к группе', label: 'Присоединиться к группе' },
+        { id: 'goalArenda', value: 'Совместная аренда жилья', label: 'Совместная аренда жилья' },
+        { id: 'goalSaleTours', value: 'Экономия на пакетном туре', label: 'Экономия на пакетном туре' },
+        { id: 'goalKinder', value: 'Путешествия с детьми', label: 'Путешествия с детьми' },
+    ];
+
+    const looking = [
+        { id: 'radio-what-1', value: 'Ищу попутчицу', label: 'Ищу попутчицу' },
+        { id: 'radio-what-2', value: 'Ищу попутчика', label: 'Ищу попутчика' },
+        { id: 'radio-what-3', value: 'Собираю группу', label: 'Собираю группу' },
+        { id: 'radio-what-4', value: 'Ищу попутчика или попутчицу', label: 'Ищу попутчика или попутчицу' },
+        { id: 'radio-what-5', value: 'Ищу попутчицу или женскую компанию', label: 'Ищу попутчицу или женскую компанию' },
+        { id: 'radio-what-6', value: 'Ищу попутчика или мужскую компанию', label: 'Ищу попутчика или мужскую компанию' },
+        { id: 'radio-what-7', value: 'Ищу попутчицу, попутчика или компанию', label: 'Ищу попутчицу, попутчика или компанию' },
+    ];
+
 
     return (
         <div className={s.blockNewTours}>
@@ -46,36 +79,30 @@ export default function NewTours(props) {
             </div>
             <Formik
                 initialValues={{
-                    selectedOptionData: "ExactDate", // Добавляем поле для хранения выбранной опции
+                    selectedOptionData: "", // Добавляем поле для хранения выбранной опции
                     name: user.firstName || "",
                     surname: user.lastName || "",
                     age: user.publicMetadata.age || "",
                     id: user.id || "",
-                    avatar: 'https://uprostim.com/wp-content/uploads/2021/03/image107-34-scaled.jpg',
+                    avatar: user.imageUrl || "",
                     level: 'Средний',
                     city: 'Москва',
-                    isMale: false,
-                    isSeekingCouple: false,
-                    isSeekingFemale: false,
-                    isGroup: false,
+                    looking: "",
+                    kinder: false,
                     text: '',
-                    images: null,
-                    goal: 'Хочу на React',
-                    day: 20,
-                    month: 7,
-                    year: 2023,
-                    train: true,
+                    images: [],
+                    goal: '',
+                    train: false,
                     air: true,
                     car: true,
-                    bicycle: true,
-                    places: ['Россия'],
+                    bike: false,
+                    foot: true,
+                    places: ['Россия', 'Боливия', 'Иваново'],
                     Ihave: false,
-                    total: 2,
+                    total: 0,
                     start_date: "", // Add field for start date
                     end_date: "",   // Add field for end date
                 }}
-
-                
 
                 onSubmit={async (values) => {
                     console.log(values)
@@ -83,6 +110,8 @@ export default function NewTours(props) {
                         .then((response) => {
                             // Обработайте успешный ответ здесь
                             console.log('Успешный ответ:', response.data);
+                            setNotificationMessage('Объявление успешно добавлено');
+                            setShowNotification(true);
                         })
                         .catch((error) => {
                             // Обработайте ошибку здесь
@@ -90,7 +119,7 @@ export default function NewTours(props) {
                         });
                 }}
             >
-                {({ values, setFieldValue }) => (
+                {({ values, setFieldValue, props }) => (
                     <Form>
                         <div className={s.sectionDateTours}>
                             <h2>Период путешествия</h2>
@@ -137,7 +166,7 @@ export default function NewTours(props) {
 
                                 <div className={s.radioGroup}>
                                     <fieldset>
-                                        <legend>Подробности даты путешествия</legend>
+                                        <legend className={s.titleLegend}>Подробности даты путешествия</legend>
                                         <div role="group" aria-labelledby="radio-group">
                                             <div className={s.radioItem}>
                                                 <Field id="radio1" className={s.formCheckInput} type="radio" name="selectedOptionData" value="ExactDate" />
@@ -171,21 +200,88 @@ export default function NewTours(props) {
                                 <label htmlFor="foto">Прикрепите фото мест</label>
                                 <Field
                                     id="foto"
-                                    value={undefined}
-                                    className={s.fileFotoInput}
-                                    type="file"
                                     name="images"
-                                    accept='image/*'
-                                    onChange={(event) =>{
-                                        setFieldValue("images", event.target.files[0]);
-                                      }}
+                                    component={FileDragAndDropField}
+                                    accept="image/*"
+                                    placeholder="Suelta la imagen ó da click para seleccionar una"
+                                    margin="normal"
                                 />
                             </div>
                         </div>
-                        <button type="submit">Добавить тур</button>
+                        <div className="sectionFormGoal">
+                            <div id={s.checkboxGroupGoal}>Цели путешествия<span>*</span></div>
+                            <div role="group" aria-labelledby="checkbox-group">
+                                {goals.map((goal) => (
+                                    <label key={goal.id} htmlFor={goal.id}>
+                                        <Field
+                                            id={goal.id}
+                                            className={s.formCheckInputGoal}
+                                            type="checkbox"
+                                            name="goal"
+                                            value={goal.value}
+                                        />
+                                        {goal.label}
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                        <div className={s.radioGroup}>
+                            <fieldset>
+                                <legend className={s.titleLegend}>Кого возьмем в путешествие</legend>
+                                <div role="group" aria-labelledby="radio-group">
+                                    {looking.map((option) => (
+                                        <div key={option.id} className={s.radioItem}>
+                                            <Field id={option.id} className={s.formCheckInput} type="radio" name="looking" value={option.value} />
+                                            <label htmlFor={option.id}>{option.label}</label>
+                                        </div>
+                                    ))}
+
+                                    <div className={s.titleKinder}>
+                                        <legend>Я путешествую с детьми</legend>
+                                        <label className={s.toggleSwitch}>
+                                            <Field type="checkbox" name="kinder" className={s.formCheckToogle} />
+                                            <span className={s.slider}></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div className={s.chekTransport} role="group" aria-labelledby="radio-group">
+                            <legend>Каким транспортом добираемся?</legend>
+                            <div className={s.transportGridIcon}>
+                                <Field id="train" type="checkbox" name="train" />
+                                <label htmlFor='train'>
+                                    <img className={values.train ? s.checked : s.unchecked} src={iconTrain} alt="" />
+                                </label>
+                                <Field id="air" type="checkbox" name="air" />
+                                <label htmlFor='air'>
+                                    <img className={values.air ? s.checked : s.unchecked} src={iconAir} alt="" />
+                                </label>
+                                <Field id="car" type="checkbox" name="car" />
+                                <label htmlFor='car'>
+                                    <img className={values.car ? s.checked : s.unchecked} src={iconCar} alt="" />
+                                </label>
+                                <Field id="bike" type="checkbox" name="bike" />
+                                <label htmlFor='bike'>
+                                    <img className={values.bike ? s.checked : s.unchecked} src={iconBike} alt="" />
+                                </label>
+                                <Field id="foot" type="checkbox" name="foot" />
+                                <label htmlFor='foot'>
+                                    <img className={values.foot ? s.checked : s.unchecked} src={iconFoot} alt="" />
+                                </label>
+                            </div>
+                        </div>
+                        <div className={s.btnToursForm}><button type="submit">Добавить тур</button></div>
                     </Form>
                 )}
             </Formik>
+            <Popup
+                open={showNotification}
+                closeOnDocumentClick
+                onClose={() => setShowNotification(false)}
+            >
+                <NotificationPopup message={notificationMessage} close={() => setShowNotification(false)} />
+            </Popup>
         </div>
     );
 }

@@ -1,12 +1,12 @@
 import {applyMiddleware, combineReducers, legacy_createStore as createStore, compose} from "redux";
 import ThunkMiddleware from "redux-thunk";
 import sityReducer from "./sity-reducer";
-import toursReducer from "./tour-reducer/tour-reducer";
+import tourReducer from "./tour-reducer/tour-reducer";
 import userReducer from "./user-reducer/user-reducer";
 
 let reducers = combineReducers ({
     searchSityTrack: sityReducer,
-    tours: toursReducer,
+    tours: tourReducer,
     user: userReducer,
 }); 
 

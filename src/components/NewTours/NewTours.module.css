@@ -1,115 +1,214 @@
-.blockNewTours input {
-    display: inline-block;
-}
-
-.blockNewTours label {
-    display: block;
-}
-
 .blockNewTours {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 .blockNewTours form {
-    padding: 1.5rem;
-    background-color: rgba(245, 245, 245);
-    border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: rgba(245, 245, 245);
+  border-radius: 0.5rem;
 }
 
-.blockNewTours legend {
-    font-weight: 700;
-    margin-left: 40px;
+.blockNewTours legend.titleLegend {
+  font-weight: 700;
+  margin-left: 40px;
 }
 
 .blockNewTours fieldset>*+* {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .blockNewTours form>*+* {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .radioItem {
-    display: flex;
-    align-items: center;
-    margin: 30px;
-}
-
-.blockNewTours input[type="checkbox"],
-.blockNewTours input[type="radio"] {
-    width: 1.5em;
-    height: 1.5em;
-    margin-right: 0.65rem;
+  display: flex;
+  align-items: center;
+  margin: 30px;
 }
 
 .blockNewTours form:nth-child(2n) {
-    accent-color: rgb(156, 142, 15);
+  accent-color: rgb(156, 142, 15);
 }
 
 .blockNewTours fieldset {
-    border-width: 2px;
-    border-style: groove;
-    border-color: rgb(192, 192, 192);
-    border-image: initial;
+  border-width: 2px;
+  border-style: groove;
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
 }
 
 .blockNewTours form {
-    padding: 1.5rem;
-    background-color: rgba(245, 245, 245);
-    border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: rgba(245, 245, 245);
+  border-radius: 0.5rem;
 }
 
-.gridDataTours, .sectionFormDescription, .inputData {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 30px;
+.gridDataTours,
+.sectionFormDescription,
+.inputData {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
 }
 
 .sectionDateTours h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin: 20px 0;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 20px 0;
 }
 
 .sectionDateTours {
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 15px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 15px;
 }
 
 .sectionDateTours p {
-    font-size: 1.2rem;
-    margin-top: 30px;
-    font-weight: 300;
-    color: #3b3b3b;
+  font-size: 1.2rem;
+  margin-top: 30px;
+  font-weight: 300;
+  color: #3b3b3b;
 }
+
 textarea {
-    width: 100%;
-    height: 150px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    resize: none;
-  }
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
 
 .sectionFormDescription textarea::-webkit-scrollbar {
-    width: 15px;
-    background-color: #f5f5f5;
-    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  width: 15px;
+  background-color: #f5f5f5;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .sectionFormDescription textarea::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #249de4;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #249de4;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.btnToursForm button {
+  background-color: #FFC107;
+  font-size: 19px;
+  color: #3b3b3b;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btnToursForm {
+  display: grid;
+  justify-content: center;
+}
+
+/* Стилизация чекбокса-переключателя */
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Создание ползунка-переключателя */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Стили для включенного состояния чекбокса-переключателя */
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+/* Стили для включенного состояния ползунка-переключателя */
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.titleKinder {
+  padding: 30px;
+}
+
+.titleKinder legend {
+  margin-bottom: 10px;
+}
+
+.chekTransport input[type="checkbox"] {
+  -webkit-appearance: none;
+  display: none;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.chekTransport label {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.chekTransport label .unchecked {
+  background-color: white;
+}
+.chekTransport label .checked {
+  background-color: rgb(0 132 255 / 14%);
+}
+
+.chekTransport label img {
+  padding: 14px;
+  border-radius: 50%;
+  width: 63px;
+}
+
+.transportGridIcon {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 70px);
+  grid-gap: 30px;
+  margin-top: 30px;
 }

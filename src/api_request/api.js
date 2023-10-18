@@ -48,12 +48,28 @@ export const newSetDataTours = async (newTours) => {
     for (const key in newTours) {
       formData.append(key, newTours[key]);
     }
-    const response = await instance.post('/newsetdatatours', formData);
+    const response = await instance.post('/tours/newsetdatatours', formData);
     return response.data;
   } catch (error) {
     throw error;
   }
 };
+
+// axios.get('http://localhost:5000/tours') // Замените URL на URL вашего сервера
+//   .then(response => {
+//     const tours = response.data;
+//     // Обработайте полученные данные о турах
+//     console.log('Tours:', tours);
+//   })
+//   .catch(error => {
+//     console.error('Error fetching tours:', error);
+//   });
+
+  export const getTours = async () => {
+    const response = await instance.get('/tours/gettours');
+    const tours = response.data;
+    return tours;
+  };
 
 const options = {
   headers: {
@@ -78,8 +94,8 @@ const instanceUser = axios.create({
 });
 
 export const getUser = async (userId) => {
-    const response = await instanceUser.get(`/users/${userId}`, options);
-    return response;
+  const response = await instanceUser.get(`/users/${userId}`, options);
+  return response;
 };
 
 // export const getUser = async (userId) => {

@@ -8,12 +8,12 @@ import {toggleFavouriteTour} from '../../../redux/tour-reducer/tour-reducer'
 
 function WishLinkItemToursCartList(props) {
 
-  const { tourId, favourites, toggleFavouriteTour } = props;
+  const { tourId, Ihave, toggleFavouriteTour } = props;
   
   const handleSetFavourites = () => {
     const updatedFavourites = {
-      ...favourites,
-      Ihave: !favourites.Ihave,
+      ...Ihave,
+      Ihave: !Ihave,
     };
     toggleFavouriteTour(tourId, updatedFavourites);
   };
@@ -23,15 +23,15 @@ function WishLinkItemToursCartList(props) {
       
       <div className={s.linkItemTours}>
         <Link onClick={handleSetFavourites} to='#'>
-          {favourites.Ihave ? (
-            <div>
+          {props.Ihave ? (
+            <div className={s.blockIhave}>
               <img src={iconHealt} alt="" />
-              <span className={s.numberWish}>{favourites.total}</span>
+              <span className={s.numberWish}>{props.total}</span>
             </div>
           ) : (
-            <div>
+            <div className={s.blockIhave}>
             <img src={iconHealtNo} alt="" />
-            <span className={s.numberWish}>{favourites.total}</span>
+            <span className={s.numberWish}>{props.total}</span>
           </div>
           )}
         </Link>

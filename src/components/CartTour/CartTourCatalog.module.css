@@ -34,12 +34,12 @@
 .dataTours span {
     background-image: url(../../assets/images/cartTours/calendar-with-a-clock-time-tools_icon-icons.com_56831.svg);
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 18px;
+    height: 18px;
     background-position: right center;
     background-repeat: no-repeat;
-    background-size: contain;
-    margin: 0 3px;
+    background-size: 18px;
+    margin: 0 5px 0 0;
 }
 .nameUser a {
     font-size: 1.2rem;
@@ -173,26 +173,26 @@
     justify-items: end;
 }
 .linkItemTours img {
-    width: 30px;
+    width: 22px;
 }
 .linkItemTours a {
     display: inline-block;
     position: relative;
+    background-color: #fff8e2;
+    padding: 4px 15px;
+    border-radius: 13px;
 }
 .numberWish {
-    position: absolute;
-    color: #fff;
-    font-size: 13px;
-    top: 14px;
-    left: 8px;
-    z-index: 2;
+    color: #000000;
+    font-size: 15px;
 }
 .linkItemTours img {
-    position: relative;
-    z-index: 1;
-    top: 8px;
     margin-right: 10px;
 }
 .linkWichColor {
     color: #ef5252;
+}
+.blockIhave {
+    display: flex;
+    align-items: center;
 }

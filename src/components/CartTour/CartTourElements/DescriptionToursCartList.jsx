@@ -8,12 +8,12 @@ export default function DescriptionToursCartList(props) {
         <div>
             <div className={s.descriptionTours}>
                 <p>
-                {props.descriptionText}
+                {props.text}
                 </p>
             </div>
             <div>
                 <GoalsUserToursCartList goal={props.goal} />
-                <TransportUserToursCartList transport={props.transport} />
+                <TransportUserToursCartList foot={props.foot} bike={props.bike} car={props.car} air={props.air} train={props.train} />
             </div>
         </div>
     )
