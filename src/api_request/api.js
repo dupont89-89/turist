@@ -1,46 +1,15 @@
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 const instance = axios.create({
   baseURL: 'http://localhost:5000',
   withCredentials: true, // Если вам нужно использовать куки или авторизацию с сервером
 });
 
-// const instanceUser = axios.create({
-//   baseURL: 'https://api.clerk.com/v1',
-//   headers: {
-//     Authorization: `Bearer 222`,
-//   },
-// });
-
-if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
-}
-
-const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-
-// const { getToken } = useAuth();
-
-// const instanceUser = axios.create({
-//   baseURL: 'https://api.clerk.com/v1',
-//   headers: {
-//     Authorization: `Bearer ${await getToken()}`,
-//   },
-// });
-
 export const getSity = async () => {
   const response = await instance.get(`/api/city`);
   return response;
 };
-
-// export const newSetDataTours = async (newTours) => {
-//   debugger;
-//   try {
-//     const response = await instance.post('/newsetdatatours', newTours);
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
 
 export const newSetDataTours = async (newTours) => {
   try {
@@ -53,17 +22,17 @@ export const newSetDataTours = async (newTours) => {
   } catch (error) {
     throw error;
   }
-};
+}; 
 
-// axios.get('http://localhost:5000/tours') // Замените URL на URL вашего сервера
-//   .then(response => {
-//     const tours = response.data;
-//     // Обработайте полученные данные о турах
-//     console.log('Tours:', tours);
-//   })
-//   .catch(error => {
-//     console.error('Error fetching tours:', error);
-//   });
+export const newSetDataUser = async (newUserData) => {
+  debugger;
+  try {
+    const response = await instance.post('/user/updateuserdata', newUserData); // Исправлен путь для добавления данных пользователя
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
   export const getTours = async () => {
     const response = await instance.get('/tours/gettours');
@@ -71,34 +40,135 @@ export const newSetDataTours = async (newTours) => {
     return tours;
   };
 
-const options = {
-  headers: {
-    Accept: "*/*",
-    Authorization: `Bearer ${clerkPubKey}`
-  }
-};
+  export const registerUser = async (userData) => {
+    try {
+      const response = await instance.post('/auth/register', userData);
+      return response.data;
+    } catch (error) {
+      console.error('Axios Error:', error);
+      if (error.response) {
+        console.error('Response Data:', error.response.data);
+        console.error('Status Code:', error.response.status);
+      }
+      throw error;
+    }
+  };
+
+  const createAuthInstance = (token) => {
+    return axios.create({
+      baseURL: 'http://localhost:5000',
+      withCredentials: true,
+      headers: {
+        'Content-Type':'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+  
+  export const getDataUserFromServer = async (token) => {
+    console.log('Это токен в getDataUserFromServer: ', token)
+    try {
+      const authInstance = createAuthInstance(token);
+      const response = await authInstance.get('user/userdata');
+      console.log('Ответ из getDataUserFromServer', response);
+      if (response.status === 200) {
+        console.log('status === 200', response);
+        return response.data;
+      } else {
+        throw new Error('Ошибка при получении данных пользователя');
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  // export const getDataUserFromServer = async (token) => {
+  //   console.log('Это токен в getDataUserFromServer: ', token)
+  //   try {
+  //     const response = await instance.get('user/userdata', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+      
+  //     if (response.status === 200) {
+  //       console.log('status === 200', response)
+  //       return response.data; // Вернуть данные пользователя
+  //     } else {
+  //       throw new Error('Ошибка при получении данных пользователя');
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
+
+  // export const loginUser = async (userData) => {
+  //   try {
+  //     const response = await instance.post('/auth/login', userData);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Axios Error:', error);
+  //     if (error.response) {
+  //       console.error('Response Data:', error.response.data);
+  //       console.error('Status Code:', error.response.status);
+  //     }
+  //     throw error;
+  //   }
+  // };
+
+  // export const loginUser = async (userData) => {
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     debugger;
+  //     const response = await instance.post('/auth/login', userData, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+      
+  //     console.log('Response Status Code:', response ? response.status : 'Undefined'); // Добавьте эту строку
+  
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Axios Error:', error);
+  //     if (error.response) {
+  //       console.error('Response Data:', error.response.data);
+  //       console.error('Status Code:', error.response.status);
+  //     }
+  //     throw error;
+  //   }
+  // };
+  
+  export const loginUser = async (userData) => {
+    try {
+      const response = await instance.post('/auth/login', userData); 
+      console.log('Response Status Code:', response ? response.status : 'Undefined'); // Добавьте эту строку
+      return response.data;
+    } catch (error) {
+      console.error('Axios Error:', error);
+      if (error.response) {
+        console.error('Response Data:', error.response.data);
+        console.error('Status Code:', error.response.status);
+      }
+      throw error;
+    }
+  };
+
+// const options = {
+//   headers: {
+//     Accept: "*/*",
+//     Authorization: `Bearer ${clerkPubKey}`
+//   }
+// };
 
 // const instanceUser = axios.create({
-//   baseURL: 'https://clean-penguin-8.clerk.accounts.dev/v1',
 //   headers: {
 //     Accept: "*/*",
 //     Authorization: `Bearer ${clerkPubKey}`,
 //   },
 // });
 
-const instanceUser = axios.create({
-  headers: {
-    Accept: "*/*",
-    Authorization: `Bearer ${clerkPubKey}`,
-  },
-});
-
-export const getUser = async (userId) => {
-  const response = await instanceUser.get(`/users/${userId}`, options);
-  return response;
-};
-
 // export const getUser = async (userId) => {
-//   const response = await axios.get(`https://clean-penguin-8.clerk.accounts.dev/v1/users/${userId}`, options)
+//   const response = await instanceUser.get(`/users/${userId}`, options);
 //   return response;
 // };

@@ -71,7 +71,7 @@
   color: #3b3b3b;
 }
 
-textarea {
+.textFormDescription textarea {
   width: 100%;
   height: 150px;
   padding: 12px 20px;
@@ -80,6 +80,22 @@ textarea {
   border-radius: 4px;
   background-color: #f8f8f8;
   resize: none;
+}
+
+.tagUser textarea {
+  border: none;
+  width: 100%;
+  height: 100px;
+  font-size: 30px;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  resize: none;
+  margin-top: -10px;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+.tagUser textarea:focus-visible {
+  outline: none;
 }
 
 .sectionFormDescription textarea::-webkit-scrollbar {
@@ -191,6 +207,7 @@ input:checked+.slider:before {
 .chekTransport label {
   cursor: pointer;
   display: inline-block;
+  position: relative;
 }
 
 .chekTransport label .unchecked {
@@ -211,4 +228,15 @@ input:checked+.slider:before {
   grid-template-columns: repeat(auto-fill, 70px);
   grid-gap: 30px;
   margin-top: 30px;
+}
+.titleLegendTag {
+  z-index: 1;
+    position: relative;
+}
+.checkedIcon::before {
+  content: "✓";
+  position: absolute;
+  color: green;
+  top: -7px;
+  left: 24px;
 }

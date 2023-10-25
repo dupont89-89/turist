@@ -1,35 +1,56 @@
-// import { getUser } from "../../api_request/api";
 
-// const ACTION_GET_USER = "ACTION_GET_USER";
+import Cookies from 'js-cookie';
 
-// export const setDataProfile = (user) => ({
-//   type: ACTION_GET_USER, user
-// });
+const ACTION_USER_DATA = "ACTION_USER_DATA ";
+const SET_AUTH_SUCCESS = "SET_AUTH_SUCCESS"
+const LOGOUT = "LOGOUT"
 
-// export const getUserClerk = (userId) => {
-//   return (dispatch) => {
-//     getUser(userId).then(response => {
-//       dispatch(setDataProfile(response));
-//     });
-//   }
-// }
+export const setDataDataUser = (dataUser) => ({
+  type: ACTION_USER_DATA, dataUser
+});
 
-// let initialState = {
-//   user: null, // Изначально устанавливаем значение user как null или пустой объект, в зависимости от ваших требований.
-// }
+export const setAuthSuccess = () => {
+  return {
+    type: SET_AUTH_SUCCESS,
+  };
+};
 
-// const userReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case ACTION_GET_USER:
-//       debugger;
-//       return {
-//         ...state,
-//         user: action.user,
-//       };
-//     // Здесь вы можете добавить другие кейсы для обновления данных пользователя, если это необходимо в будущем.
-//     default:
-//       return state;
-//   }
-// };
+export const logout = () => {
+  // Удаляем токен из локального хранилища
+  localStorage.removeItem('token');
+  return {
+    type: LOGOUT,
+  };
+};
 
-// export default userReducer;
+let initialState = {
+  dataUser: [],
+  isAuthenticated: false,
+}
+
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ACTION_USER_DATA:
+      return {
+        ...state,
+        dataUser: action.dataUser,
+      };
+    case SET_AUTH_SUCCESS:
+      debugger;
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        dataUser: null, // Обнулите данные пользователя
+      };
+    // Здесь вы можете добавить другие кейсы для обновления данных пользователя, если это необходимо в будущем.
+    default:
+      return state;
+  }
+};
+
+export default userReducer;

@@ -2,11 +2,9 @@ import React from 'react'
 import s from '../Header/Header.module.css'
 import Menu from './Menu/Menu'
 import { Link } from 'react-router-dom'
-import { useUser } from "@clerk/clerk-react";
+import LogoutButton from '../Buttons/ButtonLogout';
 
 export default function Header(props) {
-
-  const {user} = useUser();
 
   return (
     <header>
@@ -19,17 +17,11 @@ export default function Header(props) {
           <Link className={s.btnNewTours} to="newtours/">Новый тур</Link>
         </div>
         <div className={s.helloName}>
-          <div className={s.iconUser}>
-          {user ? (
-        <div><img src={user.imageUrl} alt="" /></div>
-      ) : <button>Вход/Регистрация</button>}
-            
-          </div>
-          <div className={s.name}>
-          <span>Привет, {user && user.firstName} {user && user.lastName}</span>
-          </div>
+          {props.isAuthenticated ? (<LogoutButton />
+          ) : <Link className={s.btnSigIn} to="login">Вход/Регистрация</Link>
+          }
         </div>
-      </div>
-    </header>
+      </div >
+    </header >
   )
 }

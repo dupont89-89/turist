@@ -26,6 +26,7 @@ exports.addTouristData = async (req, res) => {
 
     tourData.goal = parseStringArray(tourData.goal);
     tourData.places = parseStringArray(tourData.places);
+    tourData.heshtag = parseStringArray(tourData.heshtag);
 
     // Получите путь к загруженному файлу
     const imagePath = req.file.path;

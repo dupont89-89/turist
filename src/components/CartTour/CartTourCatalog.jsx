@@ -12,12 +12,13 @@ import FotoToursCartList from './CartTourElements/FotoToursCartList'
 import IconSearchUsersToursCartList from './CartTourElements/IconSearchUsersToursCartList'
 import WishLinkItemToursCartList from './CartTourElements/WishLinkItemToursCartList'
 import SidebarToursList from '../Sidebar/SidebarToursList'
+import TagUser from './CartTourElements/TagUser'
 
 export default function CartTourCatalog(props) {
 
   return (
     <div className={s.cartBlock}>
-      <RegionsBlockCartList />
+      <RegionsBlockCartList places={props.places} />
       <DataBlockCartList start_date={props.start_date} end_date={props.end_date} />
       <div className={s.descriptionCartBlock}>
         <div className={s.leftBlockCartList}>
@@ -29,8 +30,11 @@ export default function CartTourCatalog(props) {
           <LevelTrustUserCartList />
           <RegionsUserCartList city={props.city} age={props.age} />
           <div className={s.blockDescriptionCartList}>
-            <FotoToursCartList images={props.images} />
+            <FotoToursCartList images={props.images} /> 
             <DescriptionToursCartList foot={props.foot} bike={props.bike} car={props.car} air={props.air} train={props.train} goal={props.goal} text={props.text} />
+          </div>
+          <div>
+            <TagUser heshtag={props.heshtag} />
           </div>
         </div>
       </div>

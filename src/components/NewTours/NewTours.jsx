@@ -6,7 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import ruLocale from 'date-fns/locale/ru'; // Импортируйте локализацию напрямую из date-fns
-import { useUser } from "@clerk/clerk-react";
 import { Formik, Field, Form } from 'formik';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -28,7 +27,6 @@ export default function NewTours(props) {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const { isLoaded, isSignedIn, user } = useUser();
     const [showNotification, setShowNotification] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
     const timeZone = 'Europe/Moscow'; // Замените на нужный часовой пояс
@@ -44,10 +42,6 @@ export default function NewTours(props) {
         const calculatedEndDate = new Date(zonedStartDate.getTime() + 3 * 24 * 60 * 60 * 1000); // Добавляем 3 дня к начальной дате
         return calculatedEndDate;
     };
-
-    if (!isLoaded || !isSignedIn) {
-        return null;
-    }
 
     const goals = [
         { id: 'goalGrup', value: 'Собрать свою группу', label: 'Собрать свою группу' },
@@ -80,11 +74,11 @@ export default function NewTours(props) {
             <Formik
                 initialValues={{
                     selectedOptionData: "", // Добавляем поле для хранения выбранной опции
-                    name: user.firstName || "",
-                    surname: user.lastName || "",
-                    age: user.publicMetadata.age || "",
-                    id: user.id || "",
-                    avatar: user.imageUrl || "",
+                    name: "Денис",
+                    surname: "Птахин",
+                    age: 33,
+                    id: "123",
+                    avatar: "т",
                     level: 'Средний',
                     city: 'Москва',
                     looking: "",
@@ -100,6 +94,7 @@ export default function NewTours(props) {
                     places: ['Россия', 'Боливия', 'Иваново'],
                     Ihave: false,
                     total: 0,
+                    heshtag: ['#спорт', '#шашлык', '#корольишут', '#поход'],
                     start_date: "", // Add field for start date
                     end_date: "",   // Add field for end date
                 }}
@@ -251,25 +246,36 @@ export default function NewTours(props) {
                             <div className={s.transportGridIcon}>
                                 <Field id="train" type="checkbox" name="train" />
                                 <label htmlFor='train'>
+                                    {values.train ? <span className={s.checkedIcon}></span> : null}
                                     <img className={values.train ? s.checked : s.unchecked} src={iconTrain} alt="" />
                                 </label>
                                 <Field id="air" type="checkbox" name="air" />
                                 <label htmlFor='air'>
+                                    {values.air ? <span className={s.checkedIcon}></span> : null}
                                     <img className={values.air ? s.checked : s.unchecked} src={iconAir} alt="" />
                                 </label>
                                 <Field id="car" type="checkbox" name="car" />
                                 <label htmlFor='car'>
+                                    {values.car ? <span className={s.checkedIcon}></span> : null}
                                     <img className={values.car ? s.checked : s.unchecked} src={iconCar} alt="" />
                                 </label>
                                 <Field id="bike" type="checkbox" name="bike" />
                                 <label htmlFor='bike'>
+                                    {values.bike ? <span className={s.checkedIcon}></span> : null}
                                     <img className={values.bike ? s.checked : s.unchecked} src={iconBike} alt="" />
                                 </label>
                                 <Field id="foot" type="checkbox" name="foot" />
                                 <label htmlFor='foot'>
+                                    {values.foot ? <span className={s.checkedIcon}></span> : null}
                                     <img className={values.foot ? s.checked : s.unchecked} src={iconFoot} alt="" />
                                 </label>
                             </div>
+                        </div>
+                        <div className={s.tagUser}>
+                            <fieldset>
+                                <legend className={`${s.titleLegend} ${s.titleLegendTag}`}>ХЕШТЕГИ</legend>
+                                <Field id='heshtag' as="textarea" placeholder="Коротко о себе в виде 5-8 хештэгов" name="heshtag" />
+                            </fieldset>
                         </div>
                         <div className={s.btnToursForm}><button type="submit">Добавить тур</button></div>
                     </Form>

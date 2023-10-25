@@ -26,6 +26,7 @@ const ToursSchema = new mongoose.Schema({
   bike: Boolean,
   foot: Boolean,
   places: [String],
+  heshtag: [String],
   Ihave: Boolean,
   total: Number,
   selectedOptionData: String,

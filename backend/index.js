@@ -172,21 +172,48 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config/config');
 const touristRoutes = require('./routes/touristRoutes');
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes'); // Добавляем маршруты аутентификации
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt'); // Импортируем bcrypt
+const User = require('./models/User'); // Импортируем модель пользователя
+const session = require('express-session');
+const cookieParser = require('cookie-parser'); // Импортируйте cookie-parser
+require('dotenv').config()
 
 const app = express();
 
 app.use(express.json());
+
+app.use(cookieParser()); // Используйте cookie-parser
+
 app.use(cors({
   origin: config.CLIENT_ORIGIN,
   credentials: true,
+  methods: 'GET, POST, PUT, DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
 }));
+
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', config.CLIENT_ORIGIN);
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', config.CLIENT_ORIGIN);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
+
+// app.use((req, res, next) => {
+//   console.log('Received request:', req.url);
+//   console.log('Headers:', req.headers);
+//   next();
+// });
+
+app.use(session({
+  secret: process.env.SECRET_KEY, // Используйте значение из config.js
+  resave: false,
+  saveUninitialized: false,
+}));
 
 app.use('/uploads/tours', express.static('uploads/tours'));
 
@@ -201,7 +228,38 @@ mongoose.connect(config.MONGO_URI, {
     console.error('Error connecting to MongoDB:', error);
   });
 
+const crypto = require('crypto');
+
+
+// Пути для запросов
 app.use('/tours', touristRoutes);
+app.use('/user', userRoutes);
+app.use('/auth', authRoutes); // Используем маршруты аутентификации
+
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ username });
+      if (!user || !bcrypt.compareSync(password, user.password)) {
+        return done(null, false);
+      }
+      return done(null, user);
+    } catch (error) {
+      return done(error);
+    }
+  })
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+  req.session.user = user;
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
 
 const PORT = config.PORT;
 app.listen(PORT, () => {

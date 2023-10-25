@@ -11,7 +11,8 @@ export default function TourCatalog(props) {
             name={tour.name} 
             surname={tour.surname} 
             age={tour.age} 
-            city={tour.city} 
+            city={tour.city}
+            places={tour.places}
             avatar={tour.avatar}
             text={tour.text}
             images={tour.images[0]}
@@ -25,6 +26,7 @@ export default function TourCatalog(props) {
             foot={tour.foot}
             Ihave={tour.Ihave}
             total={tour.total}
+            heshtag={tour.heshtag}
             selectedOptionData={tour.selectedOptionData}
             start_date={tour.start_date}
             end_date={tour.end_date}
