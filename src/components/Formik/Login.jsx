@@ -1,99 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { loginUser } from './../../api_request/api';
-import { useDispatch, useSelector } from 'react-redux';
-import { setAuthSuccess, setDataDataUser, logout } from '../../redux/user-reducer/user-reducer';
-import TourustProfile from '../UserProfile/TourustProfile';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie'; // Импортируйте js-cookie
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import styles from "./styles.module.css";
 
-const Login = (props) => {
-  
-  const dispatch = useDispatch();
+const Login = () => {
+	const [data, setData] = useState({ email: "", password: "" });
+	const [error, setError] = useState("");
 
-  const navigate = useNavigate();
-  
-  const isAuthenticated = props.isAuthenticated
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
 
-  if (isAuthenticated) {
-    // Если пользователь уже авторизован, перенаправьте его на другую страницу
-    navigate('/'); // Замените '/home' на путь к вашей домашней странице
-  }
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:5000/api/auth";
+			const { data: res } = await axios.post(url, data);
+			localStorage.setItem("token", res.data);
+			window.location = "/";
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
 
-  const initialValues = {
-    username: '',
-    password: '',
-  };
-
-  const validationSchema = Yup.object().shape({
-    username: Yup.string().required('Обязательное поле'),
-    password: Yup.string().required('Обязательное поле'),
-  });
-
-  const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
-    try {
-      const loginResult = await loginUser(values);
-      console.log('Вход выполнен успешно', loginResult);
-      dispatch(setAuthSuccess());
-      if (loginResult.token) {
-        const token = loginResult.token;
-        localStorage.setItem('token', token);
-        console.log('Токен сохранен в локальном хранилище', token);
-        console.log('Это отправили токен в локал',token);
-        // Диспетчеризируйте действие, чтобы установить данные пользователя в Redux
-        dispatch(setDataDataUser(loginResult.user));
-      } else {
-        console.error('Ошибка входа: неверный формат ответа', loginResult);
-        setFieldError('username', 'Ошибка входа');
-      }
-    } catch (error) {
-      console.error('Ошибка входа', error);
-      setFieldError('username', 'Ошибка входа');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('token'); // Получите токен из локального хранилища
-    console.log('Токен из localStorage useEffect:', token);
-    if (token) {
-      // Вы можете отправить запрос на сервер, чтобы получить данные пользователя, используя токен
-      // Здесь также можно диспетчеризировать действие для установки данных пользователя в Redux
-      // Например, dispatch(setDataDataUser(userData));
-      
-    }
-  }, [dispatch]);
-
-  return (
-    <div>
-      <div className="success-message">Вход выполнен успешно! Заполните данные: <TourustProfile isAuthenticated={props.isAuthenticated} /> </div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {() => (
-          <Form>
-            <div>
-              <label htmlFor="username">Имя пользователя</label>
-              <Field type="text" id="username" name="username" />
-              <ErrorMessage name="username" component="div" className="error" />
-            </div>
-
-            <div>
-              <label htmlFor="password">Пароль</label>
-              <Field type="password" id="password" name="password" />
-              <ErrorMessage name="password" component="div" className="error" />
-            </div>
-
-            <button type="submit">Войти</button>
-          </Form>
-        )}
-      </Formik>
-    </div>
-  );
+	return (
+		<div className={styles.login_container}>
+			<div className={styles.login_form_container}>
+				<div className={styles.left}>
+					<form className={styles.form_container} onSubmit={handleSubmit}>
+						<h1>Login to Your Account</h1>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleChange}
+							value={data.email}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={handleChange}
+							value={data.password}
+							required
+							className={styles.input}
+						/>
+						{error && <div className={styles.error_msg}>{error}</div>}
+						<button type="submit" className={styles.green_btn}>
+							Sing In
+						</button>
+					</form>
+				</div>
+				<div className={styles.right}>
+					<h1>New Here ?</h1>
+					<Link to="/signup">
+						<button type="button" className={styles.white_btn}>
+							Sing Up
+						</button>
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Login;

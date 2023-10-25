@@ -6,6 +6,11 @@ import LogoutButton from '../Buttons/ButtonLogout';
 
 export default function Header(props) {
 
+  const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
+
   return (
     <header>
       <Menu />
@@ -21,6 +26,9 @@ export default function Header(props) {
           ) : <Link className={s.btnSigIn} to="login">Вход/Регистрация</Link>
           }
         </div>
+        <button className={s.white_btn} onClick={handleLogout}>
+					Logout
+				</button>
       </div >
     </header >
   )

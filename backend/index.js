@@ -172,8 +172,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config/config');
 const touristRoutes = require('./routes/touristRoutes');
-const userRoutes = require('./routes/userRoutes');
-const authRoutes = require('./routes/authRoutes'); // Добавляем маршруты аутентификации
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt'); // Импортируем bcrypt
@@ -181,19 +179,23 @@ const User = require('./models/User'); // Импортируем модель п
 const session = require('express-session');
 const cookieParser = require('cookie-parser'); // Импортируйте cookie-parser
 require('dotenv').config()
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 
+// middlewares
 app.use(express.json());
+app.use(cors());
 
 app.use(cookieParser()); // Используйте cookie-parser
 
-app.use(cors({
-  origin: config.CLIENT_ORIGIN,
-  credentials: true,
-  methods: 'GET, POST, PUT, DELETE',
-  allowedHeaders: 'Content-Type, Authorization',
-}));
+// app.use(cors({
+//   origin: config.CLIENT_ORIGIN,
+//   credentials: true,
+//   methods: 'GET, POST, PUT, DELETE',
+//   allowedHeaders: 'Content-Type, Authorization',
+// }));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', config.CLIENT_ORIGIN);
@@ -209,11 +211,11 @@ app.use((req, res, next) => {
 //   next();
 // });
 
-app.use(session({
-  secret: process.env.SECRET_KEY, // Используйте значение из config.js
-  resave: false,
-  saveUninitialized: false,
-}));
+// app.use(session({
+//   secret: process.env.SECRET_KEY, // Используйте значение из config.js
+//   resave: false,
+//   saveUninitialized: false,
+// }));
 
 app.use('/uploads/tours', express.static('uploads/tours'));
 
@@ -228,38 +230,39 @@ mongoose.connect(config.MONGO_URI, {
     console.error('Error connecting to MongoDB:', error);
   });
 
-const crypto = require('crypto');
 
 
 // Пути для запросов
 app.use('/tours', touristRoutes);
-app.use('/user', userRoutes);
-app.use('/auth', authRoutes); // Используем маршруты аутентификации
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+// app.use('/user', userRoutes);
+// app.use('/auth', authRoutes); // Используем маршруты аутентификации
 
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({ username });
-      if (!user || !bcrypt.compareSync(password, user.password)) {
-        return done(null, false);
-      }
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
-  })
-);
+// passport.use(
+//   new LocalStrategy(async (username, password, done) => {
+//     try {
+//       const user = await User.findOne({ username });
+//       if (!user || !bcrypt.compareSync(password, user.password)) {
+//         return done(null, false);
+//       }
+//       return done(null, user);
+//     } catch (error) {
+//       return done(error);
+//     }
+//   })
+// );
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-  req.session.user = user;
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+//   req.session.user = user;
+// });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   User.findById(id, (err, user) => {
+//     done(err, user);
+//   });
+// });
 
 const PORT = config.PORT;
 app.listen(PORT, () => {
