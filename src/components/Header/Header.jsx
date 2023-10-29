@@ -26,9 +26,6 @@ export default function Header(props) {
           ) : <Link className={s.btnSigIn} to="login">Вход/Регистрация</Link>
           }
         </div>
-        <button className={s.white_btn} onClick={handleLogout}>
-					Logout
-				</button>
       </div >
     </header >
   )

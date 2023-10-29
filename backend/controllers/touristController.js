@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
 const config = require('../config/config');
 const Tours = require('../models/ToursSchema'); // Убедитесь, что модель правильно импортирована
 

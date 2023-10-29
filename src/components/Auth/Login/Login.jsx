@@ -1,33 +1,37 @@
 import { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
+import { loginUser } from "../../../api_request/api";
 
-const Login = () => {
+const Login = (props) => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
+
+	const navigate = useNavigate();
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
 	};
 
-	const handleSubmit = async (e) => {
+	  const handleSubmit = async (e) => {
 		e.preventDefault();
+	  
 		try {
-			const url = "http://localhost:5000/api/auth";
-			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("token", res.data);
-			window.location = "/";
+		  const res = await loginUser(data);
+		  const token = res.data.token; // Получите токен из ответа
+		  const userData = res.data.user; // Получите данные пользователя из ответа
+		  // Сохраните токен и данные пользователя в локальном хранилище
+		  localStorage.setItem('token', token);
+		  localStorage.setItem('userData', JSON.stringify(userData));
+		  props.setDataUser(userData)
+		  props.setAuthSuccess()
+		  navigate('/');
 		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
+		  if (error.response && error.response.status >= 400 && error.response.status <= 500) {
+			setError(error.response.data.message);
+		  }
 		}
-	};
+	  };
 
 	return (
 		<div className={styles.login_container}>

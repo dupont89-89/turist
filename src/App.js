@@ -1,23 +1,43 @@
 import { Route, Routes, Navigate } from 'react-router-dom'; // Импорт Route и Routes
 import UserPage from './components/UserPage/UserPage';
 import ContainerTourCatalog from './components/TourCatalog/ContainerTourCatalog';
-import SignUp from './components/SignUp/SignUp';
+import SignUp from './components/Auth/SignUp/SignUp';
 import NewTours from './components/NewTours/NewTours';
 import './App.css';
 import TourustProfile from './components/UserProfile/TourustProfile';
 import RegistrationForm from './components/Formik/RegistrationForm';
-import LoginContainer from './components/Formik/LoginContainer';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import LoginContainer from './components/Auth/Login/LoginContainer';
+import { connect, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { getDataUserFromServer } from './api_request/api';
-import { setDataDataUser } from './redux/user-reducer/user-reducer';
+import { setAuthSuccess, setDataDataUser, setDataUser } from './redux/user-reducer/user-reducer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import axios from "axios";
-import Login from './components/Formik/Login';
+import Login from './components/Auth/Login/Login';
 
-function App() {
+function App({ setDataUser, setAuthSuccess, isAuthenticated }) {
+
+  const [isLoading, setIsLoading] = useState(true); // Добавим состояние для отслеживания загрузки
 
   const user = localStorage.getItem("token");
+
+  useEffect(() => {
+    // Попытка получить данные пользователя из localStorage при инициализации приложения
+    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+
+    if (storedUserData) {
+      // Сохраняем данные пользователя в Redux-состоянии
+      setDataUser(storedUserData);
+      setAuthSuccess()
+    }
+
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    // Если данные еще загружаются, можно показать прелоадер
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="App">
@@ -25,14 +45,14 @@ function App() {
         <div className='wrapperContent'>
           <HeaderContainer />
           <Routes>
-            {user && <Route path="/" exact element={<ContainerTourCatalog />} />}
+            {isAuthenticated && <Route path="newtours/" exact element={<NewTours />} />}
+            <Route path="/" element={<ContainerTourCatalog />} />
             <Route path="user/*" element={<UserPage />} />
             <Route path="/signup" exact element={<SignUp />} />
-            <Route path="newtours/" element={<NewTours />} />
             <Route path="profile/*" element={<TourustProfile />} />
             <Route path="/register" element={<RegistrationForm />} />
-            <Route path="/login" exact element={<Login />} />
-			<Route path="/" element={<Navigate replace to="/login" />} />
+            <Route path="/login" exact element={<LoginContainer />} />
+			      <Route path="/newtours/" element={<Navigate replace to="/login" />} />
           </Routes>
         </div>
       </div>
@@ -40,4 +60,15 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = {
+  setDataUser,
+  setAuthSuccess,
+};
+
+let mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

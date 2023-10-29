@@ -82,6 +82,28 @@ export const newSetDataUser = async (newUserData) => {
     }
   };
 
+export const signUpUser = async (userData) => {
+  try {
+    const response = await instance.post('user/signup', userData);
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.status >= 400 && error.response.status <= 500) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+};
+
+export const loginUser = async (data) => {
+  try {
+    const response = await instance.post('user/auth', data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
   // export const getDataUserFromServer = async (token) => {
   //   console.log('Это токен в getDataUserFromServer: ', token)
   //   try {
@@ -139,20 +161,20 @@ export const newSetDataUser = async (newUserData) => {
   //   }
   // };
   
-  export const loginUser = async (userData) => {
-    try {
-      const response = await instance.post('/auth/login', userData); 
-      console.log('Response Status Code:', response ? response.status : 'Undefined'); // Добавьте эту строку
-      return response.data;
-    } catch (error) {
-      console.error('Axios Error:', error);
-      if (error.response) {
-        console.error('Response Data:', error.response.data);
-        console.error('Status Code:', error.response.status);
-      }
-      throw error;
-    }
-  };
+  // export const loginUser = async (userData) => {
+  //   try {
+  //     const response = await instance.post('/auth/login', userData); 
+  //     console.log('Response Status Code:', response ? response.status : 'Undefined'); // Добавьте эту строку
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Axios Error:', error);
+  //     if (error.response) {
+  //       console.error('Response Data:', error.response.data);
+  //       console.error('Status Code:', error.response.status);
+  //     }
+  //     throw error;
+  //   }
+  // };
 
 // const options = {
 //   headers: {

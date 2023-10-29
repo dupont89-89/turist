@@ -5,7 +5,7 @@ const ACTION_USER_DATA = "ACTION_USER_DATA ";
 const SET_AUTH_SUCCESS = "SET_AUTH_SUCCESS"
 const LOGOUT = "LOGOUT"
 
-export const setDataDataUser = (dataUser) => ({
+export const setDataUser = (dataUser) => ({
   type: ACTION_USER_DATA, dataUser
 });
 
@@ -18,6 +18,7 @@ export const setAuthSuccess = () => {
 export const logout = () => {
   // Удаляем токен из локального хранилища
   localStorage.removeItem('token');
+  localStorage.removeItem('userData');
   return {
     type: LOGOUT,
   };
@@ -36,7 +37,6 @@ const userReducer = (state = initialState, action) => {
         dataUser: action.dataUser,
       };
     case SET_AUTH_SUCCESS:
-      debugger;
       return {
         ...state,
         isAuthenticated: true,

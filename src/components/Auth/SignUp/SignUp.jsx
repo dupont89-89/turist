@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
+import { signUpUser } from "../../../api_request/api";
 
 const Signup = () => {
 	const [data, setData] = useState({
@@ -20,20 +21,13 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:5000/api/users";
-			const { data: res } = await axios.post(url, data);
-			navigate("/login");
-			console.log(res.message);
+		  const res = await signUpUser(data); // Use the signUpUser function
+		  navigate("/login");
+		  console.log(res.message);
 		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
+		  setError(error.message);
 		}
-	};
+	  };
 
 	return (
 		<div className={styles.signup_container}>
