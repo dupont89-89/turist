@@ -1,6 +1,3 @@
-
-import Cookies from 'js-cookie';
-
 const ACTION_USER_DATA = "ACTION_USER_DATA ";
 const SET_AUTH_SUCCESS = "SET_AUTH_SUCCESS"
 const LOGOUT = "LOGOUT"

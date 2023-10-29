@@ -7,19 +7,14 @@ import './App.css';
 import TourustProfile from './components/UserProfile/TourustProfile';
 import RegistrationForm from './components/Formik/RegistrationForm';
 import LoginContainer from './components/Auth/Login/LoginContainer';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getDataUserFromServer } from './api_request/api';
-import { setAuthSuccess, setDataDataUser, setDataUser } from './redux/user-reducer/user-reducer';
+import { setAuthSuccess, setDataUser } from './redux/user-reducer/user-reducer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import axios from "axios";
-import Login from './components/Auth/Login/Login';
 
 function App({ setDataUser, setAuthSuccess, isAuthenticated }) {
 
   const [isLoading, setIsLoading] = useState(true); // Добавим состояние для отслеживания загрузки
-
-  const user = localStorage.getItem("token");
 
   useEffect(() => {
     // Попытка получить данные пользователя из localStorage при инициализации приложения
@@ -32,7 +27,7 @@ function App({ setDataUser, setAuthSuccess, isAuthenticated }) {
     }
 
     setIsLoading(false);
-  }, []);
+  }, [setDataUser, setAuthSuccess]);
 
   if (isLoading) {
     // Если данные еще загружаются, можно показать прелоадер

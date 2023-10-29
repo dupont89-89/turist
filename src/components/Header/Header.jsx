@@ -6,11 +6,6 @@ import LogoutButton from '../Buttons/ButtonLogout';
 
 export default function Header(props) {
 
-  const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-
   return (
     <header>
       <Menu />
