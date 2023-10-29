@@ -34,6 +34,7 @@ exports.authUserController = async (req, res) => {
 			_id: user._id,
 			firstName: user.firstName,
 			lastName: user.lastName,
+			avatar: user.avatar,
 			// Другие данные, которые вы хотите добавить
 		};
 

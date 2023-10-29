@@ -6,7 +6,6 @@ const touristRoutes = require('./routes/touristRoutes');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('dotenv').config()
-
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
@@ -31,6 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/uploads/tours', express.static('uploads/tours'));
+app.use('/uploads/avatar', express.static('uploads/avatar'));
 
 mongoose.connect(config.MONGO_URI, {
   useNewUrlParser: true,

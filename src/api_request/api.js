@@ -21,7 +21,13 @@ export const newSetDataTours = async (newTours) => {
   } catch (error) {
     throw error;
   }
-}; 
+};
+
+export const addUserAvatar = async (avatar, userId) => {
+  const response = await instance.post(`/user/uploads-avatar?userId=${userId}`, avatar);
+  debugger;
+  return response.data;
+};
 
 export const newSetDataUser = async (newUserData) => {
   debugger;

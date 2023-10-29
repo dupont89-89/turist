@@ -5,7 +5,7 @@ function HeaderContainer(props) {
 
   return (
     <div>
-      <Header isAuthenticated={props.isAuthenticated} />
+      <Header avatar={props.avatar} isAuthenticated={props.isAuthenticated} />
     </div>
   );
 }
@@ -13,6 +13,7 @@ function HeaderContainer(props) {
 let mapStateToProps = (state) => {
   return {
     isAuthenticated: state.user.isAuthenticated,
+    avatar: state.user.dataUser.avatar
   };
 }
 

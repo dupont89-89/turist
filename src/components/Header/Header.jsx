@@ -3,6 +3,7 @@ import s from '../Header/Header.module.css'
 import Menu from './Menu/Menu'
 import { Link } from 'react-router-dom'
 import LogoutButton from '../Buttons/ButtonLogout';
+import LoadAvatarContainer from '../Formik/LoadAvatarContainer';
 
 export default function Header(props) {
 
@@ -17,6 +18,8 @@ export default function Header(props) {
           <Link className={s.btnNewTours} to="newtours/">Новый тур</Link>
         </div>
         <div className={s.helloName}>
+          <img src={props.avatar} alt="" />
+          <LoadAvatarContainer />
           {props.isAuthenticated ? (<LogoutButton />
           ) : <Link className={s.btnSigIn} to="login">Вход/Регистрация</Link>
           }
