@@ -11,23 +11,27 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { setAuthSuccess, setDataUser } from './redux/user-reducer/user-reducer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import { getUser } from './api_request/api';
 
-function App({ setDataUser, setAuthSuccess, isAuthenticated }) {
+function App({ setAuthSuccess, getUser, isAuthenticated }) {
 
   const [isLoading, setIsLoading] = useState(true); // Добавим состояние для отслеживания загрузки
 
   useEffect(() => {
     // Попытка получить данные пользователя из localStorage при инициализации приложения
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    // const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    const userId = JSON.parse(localStorage.getItem('userId'));
 
-    if (storedUserData) {
+    if (userId) {
       // Сохраняем данные пользователя в Redux-состоянии
-      setDataUser(storedUserData);
-      setAuthSuccess()
+      // setDataUser(storedUserData);
+      setAuthSuccess();
+      // getUser(userId)
+      getUser(userId);
     }
 
     setIsLoading(false);
-  }, [setDataUser, setAuthSuccess]);
+  }, [setAuthSuccess, getUser]);
 
   if (isLoading) {
     // Если данные еще загружаются, можно показать прелоадер
@@ -45,7 +49,6 @@ function App({ setDataUser, setAuthSuccess, isAuthenticated }) {
             <Route path="user/*" element={<UserPage />} />
             <Route path="/signup" exact element={<SignUp />} />
             <Route path="profile/*" element={<TourustProfile />} />
-            <Route path="/register" element={<RegistrationForm />} />
             <Route path="/login" exact element={<LoginContainer />} />
 			      <Route path="/newtours/" element={<Navigate replace to="/login" />} />
           </Routes>
@@ -58,6 +61,7 @@ function App({ setDataUser, setAuthSuccess, isAuthenticated }) {
 const mapDispatchToProps = {
   setDataUser,
   setAuthSuccess,
+  getUser,
 };
 
 let mapStateToProps = (state) => {

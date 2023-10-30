@@ -1,20 +1,25 @@
 import { connect } from 'react-redux';
 import LoadAvatar from './LoadAvatar';
+import { getUser } from '../../api_request/api';
 
 function LoadAvatarContainer(props) {
     debugger;
 
   return (
     <div>
-      <LoadAvatar userId={props.userId} />
+      <LoadAvatar getUser={props.getUser} userId={props.userId} />
     </div>
   );
-}
+} 
 
 let mapStateToProps = (state) => {
   return {
-    userId: state.user.dataUser._id,
+    userId: state.user.dataUser.userId,
   };
 }
 
-export default connect(mapStateToProps)(LoadAvatarContainer);
+const mapDispatchToProps = {
+  getUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoadAvatarContainer);

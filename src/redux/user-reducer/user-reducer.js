@@ -16,19 +16,21 @@ export const logout = () => {
   // Удаляем токен из локального хранилища
   localStorage.removeItem('token');
   localStorage.removeItem('userData');
+  localStorage.removeItem('userId');
   return {
     type: LOGOUT,
   };
 };
 
 let initialState = {
-  dataUser: [],
+  dataUser: [], // Изменено на null
   isAuthenticated: false,
 }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTION_USER_DATA:
+      debugger;
       return {
         ...state,
         dataUser: action.dataUser,

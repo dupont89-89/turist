@@ -5,15 +5,17 @@ import FileDragAndDropField from './Index';
 import { addUserAvatar } from '../../api_request/api';
 
 export default function LoadAvatar(props) {
-  debugger;
+
   const handleSubmit = async (values) => {
     const avatar = new FormData();
     avatar.append("avatar", values.avatar);
     const userId = props.userId
 
     try {
-      addUserAvatar(avatar, userId)
+      await addUserAvatar(avatar, userId);
+      props.getUser(userId);
       console.log("Ссылка на аватар: ", avatar);
+
     } catch (error) {
       console.error("Ошибка загрузки аватара: ", error.avatar);
     }

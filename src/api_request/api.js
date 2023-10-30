@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setDataUser } from "../redux/user-reducer/user-reducer";
 
 const instance = axios.create({
   baseURL: 'http://localhost:5000',
@@ -23,14 +24,32 @@ export const newSetDataTours = async (newTours) => {
   }
 };
 
+export const getUser = (userId) => {
+  return async (dispatch) => {
+    try {
+      const response = await instance.get(`/user/get-user?userId=${userId}`);
+      debugger;
+      const userData = response.data.userData;
+      debugger;
+      // Dispatch the setDataUser action to update the user data in the Redux store
+      dispatch(setDataUser(userData));
+      debugger;
+
+      return response.data;
+    } catch (error) {
+      // Handle errors here, e.g., dispatch an error action
+      console.error('Error fetching user data:', error);
+    }
+  };
+};
+
+
 export const addUserAvatar = async (avatar, userId) => {
   const response = await instance.post(`/user/uploads-avatar?userId=${userId}`, avatar);
-  debugger;
   return response.data;
 };
 
 export const newSetDataUser = async (newUserData) => {
-  debugger;
   try {
     const response = await instance.post('/user/updateuserdata', newUserData); // Исправлен путь для добавления данных пользователя
     return response.data;
@@ -45,47 +64,47 @@ export const newSetDataUser = async (newUserData) => {
     return tours;
   };
 
-  export const registerUser = async (userData) => {
-    try {
-      const response = await instance.post('/auth/register', userData);
-      return response.data;
-    } catch (error) {
-      console.error('Axios Error:', error);
-      if (error.response) {
-        console.error('Response Data:', error.response.data);
-        console.error('Status Code:', error.response.status);
-      }
-      throw error;
-    }
-  };
+  // export const registerUser = async (userData) => {
+  //   try {
+  //     const response = await instance.post('/auth/register', userData);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Axios Error:', error);
+  //     if (error.response) {
+  //       console.error('Response Data:', error.response.data);
+  //       console.error('Status Code:', error.response.status);
+  //     }
+  //     throw error;
+  //   }
+  // };
 
-  const createAuthInstance = (token) => {
-    return axios.create({
-      baseURL: 'http://localhost:5000',
-      withCredentials: true,
-      headers: {
-        'Content-Type':'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  };
+  // const createAuthInstance = (token) => {
+  //   return axios.create({
+  //     baseURL: 'http://localhost:5000',
+  //     withCredentials: true,
+  //     headers: {
+  //       'Content-Type':'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  // };
   
-  export const getDataUserFromServer = async (token) => {
-    console.log('Это токен в getDataUserFromServer: ', token)
-    try {
-      const authInstance = createAuthInstance(token);
-      const response = await authInstance.get('user/userdata');
-      console.log('Ответ из getDataUserFromServer', response);
-      if (response.status === 200) {
-        console.log('status === 200', response);
-        return response.data;
-      } else {
-        throw new Error('Ошибка при получении данных пользователя');
-      }
-    } catch (error) {
-      throw error;
-    }
-  };
+  // export const getDataUserFromServer = async (token) => {
+  //   console.log('Это токен в getDataUserFromServer: ', token)
+  //   try {
+  //     const authInstance = createAuthInstance(token);
+  //     const response = await authInstance.get('user/userdata');
+  //     console.log('Ответ из getDataUserFromServer', response);
+  //     if (response.status === 200) {
+  //       console.log('status === 200', response);
+  //       return response.data;
+  //     } else {
+  //       throw new Error('Ошибка при получении данных пользователя');
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
 
 export const signUpUser = async (userData) => {
   try {

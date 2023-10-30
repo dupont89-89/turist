@@ -31,11 +31,9 @@ exports.authUserController = async (req, res) => {
 
 		// Создайте объект с данными пользователя
 		const userData = {
-			_id: user._id,
+			userId: user._id,
 			firstName: user.firstName,
-			lastName: user.lastName,
-			avatar: user.avatar,
-			// Другие данные, которые вы хотите добавить
+			lastName: user.lastName,			// Другие данные, которые вы хотите добавить
 		};
 
 		// Отправьте объект userData вместе с токеном в ответе

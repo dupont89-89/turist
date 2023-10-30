@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux';
 import Header from './Header';
 
@@ -5,7 +6,7 @@ function HeaderContainer(props) {
 
   return (
     <div>
-      <Header avatar={props.avatar} isAuthenticated={props.isAuthenticated} />
+      <Header lastName={props.lastName} firstName={props.firstName} avatar={props.avatar} isAuthenticated={props.isAuthenticated} />
     </div>
   );
 }
@@ -13,7 +14,9 @@ function HeaderContainer(props) {
 let mapStateToProps = (state) => {
   return {
     isAuthenticated: state.user.isAuthenticated,
-    avatar: state.user.dataUser.avatar
+    avatar: state.user.dataUser.avatar,
+    firstName: state.user.dataUser.firstName,
+    lastName: state.user.dataUser.lastName,
   };
 }
 

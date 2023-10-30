@@ -20,10 +20,13 @@ const Login = (props) => {
 		  const res = await loginUser(data);
 		  const token = res.data.token; // Получите токен из ответа
 		  const userData = res.data.user; // Получите данные пользователя из ответа
+		  const userId = res.data.user.userId; // Получите данные пользователя из ответа
 		  // Сохраните токен и данные пользователя в локальном хранилище
 		  localStorage.setItem('token', token);
 		  localStorage.setItem('userData', JSON.stringify(userData));
-		  props.setDataUser(userData)
+		  localStorage.setItem('userId', JSON.stringify(userId));
+		//   props.setDataUser(userData)
+		  props.getUser(userId)
 		  props.setAuthSuccess()
 		  navigate('/');
 		} catch (error) {

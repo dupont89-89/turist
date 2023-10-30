@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/user-reducer/user-reducer';
 
 const LogoutButton = () => {
+
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -17,3 +18,5 @@ const LogoutButton = () => {
 };
 
 export default LogoutButton;
+
+
