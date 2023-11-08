@@ -249,3 +249,14 @@
     color: #373737;
     background-color: #cdcdcd;
 }
+
+.addDataTours {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.addDataTours span {
+    display: block;
+    font-size: 13px;
+    color: #626262;
+}

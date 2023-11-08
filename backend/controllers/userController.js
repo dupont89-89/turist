@@ -32,7 +32,12 @@ exports.getUserDataState = async (req, res) => {
 			userId: user._id,
 			firstName: user.firstName,
 			lastName: user.lastName,
-			avatar: user.avatar,			// Другие данные, которые вы хотите добавить
+			avatar: user.avatar,
+			age: user.age,
+			subscription: user.subscription,
+			sity: user.sity,
+			tel: user.tel,
+			socialNetwork: user.socialNetwork, 		// Другие данные, которые вы хотите добавить
 		};
 		res.status(200).json({ userData }); // Assuming you want to send the user data as JSON
 	  } else {
@@ -42,6 +47,53 @@ exports.getUserDataState = async (req, res) => {
 	} catch (error) {
 	  // Handle any errors that occur during the query
 	  console.error("Error retrieving user:", error);
+	  res.status(500).json({ message: "Internal Server Error" });
+	}
+  };
+
+  exports.uploadsDataUser = async (req, res) => {
+	try {
+	  // Извлеките идентификатор пользователя из запроса (это может быть параметр в URL или тело запроса)
+	  const userId = req.query.userId;
+  
+	  // Извлеките обновления пользователя из тела запроса
+	  const updates = req.body;
+  
+	  // Проверьте, есть ли идентификатор пользователя и данные для обновления
+	  if (!userId || Object.keys(updates).length === 0) {
+		return res.status(400).json({ message: "Invalid request. Please provide a userId and updates." });
+	  }
+  
+	  // Поиск пользователя по идентификатору
+	  const user = await User.findOne({ _id: userId });
+  
+	  if (user) {
+		// Обновите поля пользователя на основе переданных обновлений
+		if (updates.firstName) {
+		  user.firstName = updates.firstName;
+		}
+		if (updates.lastName) {
+		  user.lastName = updates.lastName;
+		}
+		if (updates.age) {
+			console.log(updates.age)
+			// Обновление age как объекта Date
+			user.age = new Date(updates.age);
+		  }
+		// Другие обновления...
+  
+		// Сохраните обновленные данные пользователя в базе данных
+		await user.save();
+  
+		// Отправьте успешный ответ
+		res.status(200).json({ message: "User data updated successfully" });
+	  } else {
+		// Пользователь не найден, отправьте 404 Not Found
+		res.status(404).json({ message: "User not found" });
+	  }
+	} catch (error) {
+	  // Обработка ошибок
+	  console.error("Error updating user data:", error);
 	  res.status(500).json({ message: "Internal Server Error" });
 	}
   };

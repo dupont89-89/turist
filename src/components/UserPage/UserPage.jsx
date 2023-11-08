@@ -10,32 +10,33 @@ import UserPageAds from './UserPageAds'
 import UserPageIconUserContent from './UserPageIconUserContent'
 
 export default function UserPage(props) {
+    debugger;
     return (
         <div className={s.contentUserPage}>
             <div className={s.userPageLeftBlock}>
                 <div className={s.userPageBlock}>
-                    <div>
+                    {/* <div>
                         <UserPageFoto />
-                    </div>
+                    </div> */}
                     <div>
-                        <UserPageName />
-                        <UserPageLevel />
+                        <UserPageName lastName={props.lastName} firstName={props.firstName} />
+                        {/* <UserPageLevel />
                         <UserPageIconSocial />
-                        <UserPageMessageBtn />
+                        <UserPageMessageBtn /> */}
                     </div>
                 </div>
                 <div className={s.userPageBlockUserContent}>
-                    <UserPageIconUserContent />
+                    {/* <UserPageIconUserContent /> */}
                 </div>
                 <div className={s.titleMyAds}>
                     <h2>Мои объявления <span>(2)</span></h2>
                     <div>
-                        <UserPageAds />
+                        {/* <UserPageAds /> */}
                     </div>
                 </div>
             </div>
             <div>
-                <SidebarUserPage />
+                {/* <SidebarUserPage /> */}
             </div>
         </div>
     )

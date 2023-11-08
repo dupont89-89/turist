@@ -3,7 +3,6 @@ import LoadAvatar from './LoadAvatar';
 import { getUser } from '../../api_request/api';
 
 function LoadAvatarContainer(props) {
-    debugger;
 
   return (
     <div>

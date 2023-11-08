@@ -28,13 +28,9 @@ export const getUser = (userId) => {
   return async (dispatch) => {
     try {
       const response = await instance.get(`/user/get-user?userId=${userId}`);
-      debugger;
       const userData = response.data.userData;
-      debugger;
       // Dispatch the setDataUser action to update the user data in the Redux store
       dispatch(setDataUser(userData));
-      debugger;
-
       return response.data;
     } catch (error) {
       // Handle errors here, e.g., dispatch an error action
@@ -49,20 +45,55 @@ export const addUserAvatar = async (avatar, userId) => {
   return response.data;
 };
 
-export const newSetDataUser = async (newUserData) => {
+export const updateUserData = async (userId, updates) => {
+  debugger;
   try {
-    const response = await instance.post('/user/updateuserdata', newUserData); // Исправлен путь для добавления данных пользователя
+    const response = await instance.patch(`user/uploads-data-user?userId=${userId}`, updates);
+    // Обработка успешного ответа
+    return response.data;
+  } catch (error) {
+    // Обработка ошибок
+    console.error('Error updating user data:', error);
+    throw error;
+  }
+}
+
+export const getTours = async () => {
+    const response = await instance.get('/tours/gettours');
+    const tours = response.data;
+    return tours;
+  };
+
+export const signUpUser = async (userData) => {
+  try {
+    const response = await instance.post('user/signup', userData);
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.status >= 400 && error.response.status <= 500) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+};
+
+export const loginUser = async (data) => {
+  try {
+    const response = await instance.post('user/auth', data);
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-  export const getTours = async () => {
-    const response = await instance.get('/tours/gettours');
-    const tours = response.data;
-    return tours;
-  };
+// export const newSetDataUser = async (newUserData) => {
+//   try {
+//     const response = await instance.post('/user/updateuserdata', newUserData); // Исправлен путь для добавления данных пользователя
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
   // export const registerUser = async (userData) => {
   //   try {
@@ -105,28 +136,6 @@ export const newSetDataUser = async (newUserData) => {
   //     throw error;
   //   }
   // };
-
-export const signUpUser = async (userData) => {
-  try {
-    const response = await instance.post('user/signup', userData);
-    return response.data;
-  } catch (error) {
-    if (error.response && error.response.status >= 400 && error.response.status <= 500) {
-      throw new Error(error.response.data.message);
-    } else {
-      throw new Error("An error occurred while processing your request.");
-    }
-  }
-};
-
-export const loginUser = async (data) => {
-  try {
-    const response = await instance.post('user/auth', data);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
 
   // export const getDataUserFromServer = async (token) => {
   //   console.log('Это токен в getDataUserFromServer: ', token)

@@ -19,8 +19,20 @@ const Signup = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+	  
+		// Удаляем пробелы в начале и конце из firstName и lastName
+		const trimmedFirstName = data.firstName.trim();
+		const trimmedLastName = data.lastName.trim();
+	  
+		// Проверяем, что после удаления пробелов поле не является пустым
+		if (trimmedFirstName === '' || trimmedLastName === '') {
+		  setError("First Name and Last Name cannot be empty or contain leading/trailing spaces.");
+		  return;
+		}
+	  
+		// Если проверки прошли успешно, отправляем данные
 		try {
-		  const res = await signUpUser(data); // Use the signUpUser function
+		  const res = await signUpUser({ ...data, firstName: trimmedFirstName, lastName: trimmedLastName });
 		  navigate("/login");
 		  console.log(res.message);
 		} catch (error) {

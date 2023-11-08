@@ -8,7 +8,18 @@ const userSchema = new mongoose.Schema({
 	lastName: { type: String, required: true },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
-	avatar: { type: String }, // Добавьте поле для ссылки на аватар
+	avatar: { type: String }, 
+	age: { type: Date },
+	subscription: { type: Boolean },
+	sity: { type: String},
+	tel: { type: String},
+	socialNetwork: [
+		{
+		vk: String,
+		odnoklassniki: String,
+		telegram: String,
+		}
+	]
 });
 
 userSchema.methods.generateAuthToken = function () {

@@ -1,17 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import s from '../Header/Header.module.css'
 import Menu from './Menu/Menu'
-import { Link } from 'react-router-dom'
-import LogoutButton from '../Buttons/ButtonLogout';
+import { Link, useParams } from 'react-router-dom'
+import avatar from '../../assets/images/User/traveler.png'
 
 export default function Header(props) {
-
-useEffect(() => {
-  console.log("useEffect triggered");
-  console.log("Props:", props);
-  // Ваш код здесь
-}, [props.isAuthenticated, props.avatar, props.lastName, props.firstName]);
-
 
   return (
     <header>
@@ -23,15 +16,21 @@ useEffect(() => {
           <Link className={s.btnNewTours} to="newtours/">Новый тур</Link>
         </div>
         <div className={s.helloName}>
+          <div className={s.iconUser}>
+            {props.avatar ? (
+              <img src={props.avatar} alt="" />
+            ) : (
+              <img src={avatar} alt="" />
+            )}
+          </div>
+          <div className={s.name}><span>{props.firstName} {props.lastName} </span></div>
           {props.isAuthenticated ? (
-            <>
-              <div className={s.iconUser}><img src={props.avatar} alt="" /></div>
-              <div className={s.name}><span>{props.lastName} {props.firstName}</span></div>
-            </>
-          ) : null}
-          {props.isAuthenticated ? (<LogoutButton />
-          ) : <Link className={s.btnSigIn} to="login">Вход/Регистрация</Link>
-          }
+            <span className={s.linkProfil}>
+              <Link to="profile/">Профиль</Link>
+            </span>
+          ) : (
+            <div className={s.btnSigIn}><Link to="login">Вход/Регистрация</Link></div>
+          )}
         </div>
       </div >
     </header >

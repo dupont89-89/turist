@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 // Schema и модель для тура
 const ToursSchema = new mongoose.Schema({
-  id: String,
-  name: String,
-  surname: String,
+  userId: String,
+  firstName: String,
+  lastName: String,
   age: Number,
   avatar: String,
   level: String,

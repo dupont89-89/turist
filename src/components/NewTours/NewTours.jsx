@@ -37,11 +37,11 @@ export default function NewTours(props) {
         setEndDate(new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000)); // Добавляем 3 дня к сегодняшней дате
     }, []);
 
-    const calculateEndDate = (startDate) => {
-        const zonedStartDate = utcToZonedTime(startDate, timeZone);
-        const calculatedEndDate = new Date(zonedStartDate.getTime() + 3 * 24 * 60 * 60 * 1000); // Добавляем 3 дня к начальной дате
-        return calculatedEndDate;
-    };
+    // const calculateEndDate = (startDate) => {
+    //     const zonedStartDate = utcToZonedTime(startDate, timeZone);
+    //     const calculatedEndDate = new Date(zonedStartDate.getTime() + 3 * 24 * 60 * 60 * 1000); // Добавляем 3 дня к начальной дате
+    //     return calculatedEndDate;
+    // };
 
     const goals = [
         { id: 'goalGrup', value: 'Собрать свою группу', label: 'Собрать свою группу' },
@@ -74,11 +74,11 @@ export default function NewTours(props) {
             <Formik
                 initialValues={{
                     selectedOptionData: "", // Добавляем поле для хранения выбранной опции
-                    name: "Денис",
-                    surname: "Птахин",
+                    firstName: props.firstName,
+                    lastName: props.lastName,
                     age: 33,
-                    id: "123",
-                    avatar: "т",
+                    userId: props.userId,
+                    avatar: props.avatar,
                     level: 'Средний',
                     city: 'Москва',
                     looking: "",

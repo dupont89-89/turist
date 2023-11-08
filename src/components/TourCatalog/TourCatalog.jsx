@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './TourCatalog.module.css'
 import SidebarToursList from '../Sidebar/SidebarToursList'
 import CartTourCatalog from '../CartTour/CartTourCatalog'
+import ButtonFiltr from '../Buttons/ButtonFiltr';
 
 export default function TourCatalog(props) {
-    let tours = props.toursItem
-        .map(tour => <CartTourCatalog  
-            id={tour.id} 
-            key={tour.id} 
-            name={tour.name} 
-            surname={tour.surname} 
-            age={tour.age} 
+
+    const [isReversed, setIsReversed] = useState(false);
+
+    const tourCopyRevers = isReversed ? [...props.toursItem].reverse() : [...props.toursItem];
+
+    const toogleButton = () => {
+        setIsReversed(!isReversed)
+    };
+
+
+    let tours = tourCopyRevers
+        .map(tour => <CartTourCatalog
+            userId={tour.userId}
+            toursId={tour._id}
+            key={tour._id}
+            lastName={tour.lastName}
+            firstName={tour.firstName}
+            age={tour.age}
             city={tour.city}
             places={tour.places}
             avatar={tour.avatar}
@@ -33,12 +45,16 @@ export default function TourCatalog(props) {
             date={tour.date}
             favourites={tour.favourites}
             addFavouritesAction={props.addFavouritesAction}
-            />);
+        />);
 
 
     return (
         <div className={s.contentCartTours}>
             <div className={s.itemCartTours}>
+                <div className={s.blockFiltrBtn}>
+                    <span className={s.btnTitle}>Порядок отображеня</span>
+                    <ButtonFiltr onClick={toogleButton}>{isReversed ? (<span>По дате добавления</span>) : (<span>Показать новые</span>)}</ButtonFiltr>
+                    </div>
                 {tours}
             </div>
             <div className={s.SidebarBlockToursList}>

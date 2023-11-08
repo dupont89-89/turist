@@ -17,13 +17,13 @@ app.use(cookieParser());
 app.use(cors({
   origin: config.CLIENT_ORIGIN,
   credentials: true,
-  methods: 'GET, POST, PUT, DELETE',
+  methods: 'GET, POST, PUT, DELETE, PATCH',
   allowedHeaders: 'Content-Type, Authorization',
 }));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', config.CLIENT_ORIGIN);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH'); // Добавьте PATCH
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();

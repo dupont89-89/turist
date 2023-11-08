@@ -11,13 +11,14 @@ import LevelTrustUserCartList from './CartTourElements/LevelTrustUserCartList'
 import FotoToursCartList from './CartTourElements/FotoToursCartList'
 import IconSearchUsersToursCartList from './CartTourElements/IconSearchUsersToursCartList'
 import WishLinkItemToursCartList from './CartTourElements/WishLinkItemToursCartList'
-import SidebarToursList from '../Sidebar/SidebarToursList'
 import TagUser from './CartTourElements/TagUser'
+import DataAddToursCartLIst from './CartTourElements/DataAddToursCartLIst'
 
 export default function CartTourCatalog(props) {
 
   return (
     <div className={s.cartBlock}>
+      <DataAddToursCartLIst date={props.date} />
       <RegionsBlockCartList places={props.places} />
       <DataBlockCartList start_date={props.start_date} end_date={props.end_date} />
       <div className={s.descriptionCartBlock}>
@@ -26,8 +27,8 @@ export default function CartTourCatalog(props) {
           <IconSearchUsersToursCartList looking={props.looking} />
         </div>
         <div className={s.rightBlockCartList}>
-          <NameUserCartList id={props.id} name={props.name} surname={props.surname} />
-          <LevelTrustUserCartList />
+          <NameUserCartList userId={props.userId} firstName={props.firstName} lastName={props.lastName} />
+          <LevelTrustUserCartList />e
           <RegionsUserCartList city={props.city} age={props.age} />
           <div className={s.blockDescriptionCartList}>
             <FotoToursCartList images={props.images} /> 
@@ -39,7 +40,7 @@ export default function CartTourCatalog(props) {
         </div>
       </div>
       <div className={s.linkBtnCartList}>
-        <WishLinkItemToursCartList tourId={props.id} addFavouritesAction={props.addFavouritesAction} Ihave={props.Ihave} total={props.total} />
+        <WishLinkItemToursCartList tourId={props.toursId} addFavouritesAction={props.addFavouritesAction} Ihave={props.Ihave} total={props.total} />
         <ButtonItemToursCartList />
       </div>
     </div>

@@ -4,20 +4,23 @@ header h1 {
   text-align: center;
   width: 500px;
 }
+
 .btnNewTours {
   background-color: #FFC107;
-    font-size: 2rem;
-    color: black;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 20px;
+  font-size: 2rem;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
+
 .btnNewTours:hover {
-     background-color: #e99a10;
-    font-size: 2rem;
-    color: rgb(255, 255, 255);
-    transition: all 0.3s ease-out;
+  background-color: #e99a10;
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  transition: all 0.3s ease-out;
 }
+
 header {
   height: 450px;
 }
@@ -90,7 +93,8 @@ header {
   box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
 }
 
-.menuBlockHeader .itemMenu a:hover .textLink, .blockItemPodMenu a:hover .itemPodMenu  {
+.menuBlockHeader .itemMenu a:hover .textLink,
+.blockItemPodMenu a:hover .itemPodMenu {
   background-color: cornsilk;
 }
 
@@ -191,12 +195,14 @@ header {
   border: 1px solid;
   cursor: pointer;
 }
+
 .gridHeaderRowTwo {
   display: grid;
   grid-template-columns: 300px 1fr 300px;
   grid-gap: 30px;
   align-items: center;
 }
+
 .iconUser img {
   border-radius: 50%;
   border: #fff solid;
@@ -205,12 +211,41 @@ header {
   object-fit: cover;
   text-align: center;
 }
-.iconUser, .name {
+
+.iconUser,
+.name,
+.btnSigIn {
   text-align: center;
 }
+
 .name span {
   font-size: 1rem;
   color: #fff;
   margin-top: 15px;
   display: block;
+}
+
+.btnSigIn a {
+  font-size: 1rem;
+  padding: 7px 15px;
+  background-color: #347ce7;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 15px;
+  color: #fff;
+}
+
+.linkProfil {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.linkProfil a {
+  background-color: #e99a10;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
 }

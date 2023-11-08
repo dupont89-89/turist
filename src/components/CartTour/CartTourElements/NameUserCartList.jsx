@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function NameUserCartList(props) {
   return (
-    <div className={s.nameUser}><Link to={`user/${props.id}`}>{props.name} {props.surname}</Link></div>
+    <div className={s.nameUser}><Link to={`user/${props.id}`}>{props.firstName} {props.lastName.charAt(0)}.</Link></div>
   )
 }
+
