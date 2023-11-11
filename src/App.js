@@ -26,7 +26,6 @@ function App({ setAuthSuccess, getUser, isAuthenticated }) {
       setAuthSuccess();
       // getUser(userId)
       getUser(userId);
-      debugger;
     }
     setIsLoading(false);
   }, [isAuthenticated]);

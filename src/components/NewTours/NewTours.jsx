@@ -76,7 +76,7 @@ export default function NewTours(props) {
                     selectedOptionData: "", // Добавляем поле для хранения выбранной опции
                     firstName: props.firstName,
                     lastName: props.lastName,
-                    age: 33,
+                    age: props.age,
                     userId: props.userId,
                     avatar: props.avatar,
                     level: 'Средний',

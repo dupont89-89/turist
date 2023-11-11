@@ -4,38 +4,56 @@ import LogoutButton from '../Buttons/ButtonLogout';
 import LoadAvatarContainer from '../Formik/LoadAvatarContainer';
 import { Form, Formik } from 'formik';
 import { updateUserData } from '../../api_request/api';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import ru from "date-fns/locale/ru"; // the locale you want
+import { utcToZonedTime } from 'date-fns-tz';
+import Popup from 'reactjs-popup';
+import NotificationPopup from '../Popup/NotificationPopup';
+
+registerLocale("ru", ru); // register it with the name you want
+const timeZone = 'Europe/Moscow'; // Замените на нужный часовой пояс
 
 export default function TourustProfile(props) {
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const handleSubmit = (date) => {
-    updateUserData(props.userId, { age: date });
-  };
-
-  useEffect(() => {
-    handleSubmit(selectedDate);
-  }, [props.userId, selectedDate]);
+  const maxDate = new Date();
+  const minDate = new Date(new Date().getFullYear() - 90, 0, 1);
 
   return (
     <div>
       <Formik
         initialValues={{ age: selectedDate }}
-        onSubmit={(values) => {
-          // Ничего не делайте здесь, обработка происходит в useEffect
+        onSubmit={async (values) => {
+          try {
+            const response = await updateUserData(props.userId, { age: values.age.toISOString() });
+            console.log('Успешный ответ:', response.data);
+            setNotificationMessage('Данные обновлены');
+            setShowNotification(true);
+          } catch (error) {
+            console.error('Ошибка:', error);
+          }
         }}
       >
-        {({ handleSubmit }) => (
-          <Form onSubmit={handleSubmit}>
+        {({ values, setFieldValue }) => (
+          <Form>
             <label htmlFor="age">Дата рождения</label>
             <DatePicker
-              showIcon
+              showYearDropdown
+              dateFormat="dd-MM-yyyy"
+              yearDropdownItemNumber={90}
+              scrollableYearDropdown
+              maxDate={maxDate}
+              minDate={minDate}
+              locale={ru}
               selected={selectedDate}
               onChange={(date) => {
-                console.log("Выбранная дата:", date);
-                setSelectedDate(date);
+                const zonedDate = utcToZonedTime(date, timeZone);
+                setSelectedDate(zonedDate);
+                setFieldValue('age', zonedDate);
               }}
             />
             <button type="submit">Отправить</button>
@@ -48,6 +66,14 @@ export default function TourustProfile(props) {
       <div>
         <LoadAvatarContainer />
       </div>
+      <Popup
+        open={showNotification}
+        closeOnDocumentClick
+        onClose={() => setShowNotification(false)}
+      >
+        <NotificationPopup message={notificationMessage} close={() => setShowNotification(false)} />
+      </Popup>
+
     </div>
   );
 }

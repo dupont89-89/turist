@@ -5,7 +5,7 @@ import NewTours from './NewTours'
 function NewToursContainer(props) {
   return (
     <div>
-        <NewTours userId={props.userId} lastName={props.lastName} firstName={props.firstName} avatar={props.avatar} />
+        <NewTours age={props.age} userId={props.userId} lastName={props.lastName} firstName={props.firstName} avatar={props.avatar} />
     </div>
   )
 }
@@ -18,6 +18,7 @@ let mapStateToProps = (state) => {
     lastName: state.user.dataUser.lastName,
     userId: state.user.dataUser.userId,
     avatar: state.user.dataUser.avatar,
+    age: state.user.dataUser.age,
     };
   }
   

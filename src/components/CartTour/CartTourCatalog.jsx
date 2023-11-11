@@ -28,7 +28,7 @@ export default function CartTourCatalog(props) {
         </div>
         <div className={s.rightBlockCartList}>
           <NameUserCartList userId={props.userId} firstName={props.firstName} lastName={props.lastName} />
-          <LevelTrustUserCartList />e
+          <LevelTrustUserCartList />
           <RegionsUserCartList city={props.city} age={props.age} />
           <div className={s.blockDescriptionCartList}>
             <FotoToursCartList images={props.images} /> 

@@ -5,7 +5,7 @@ const ToursSchema = new mongoose.Schema({
   userId: String,
   firstName: String,
   lastName: String,
-  age: Number,
+  age: Date,
   avatar: String,
   level: String,
   city: String,
