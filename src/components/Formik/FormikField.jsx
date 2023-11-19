@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 
-const FormikField = ({ name, label, ...restProps }) => {
+const FormikField = ({ name, label, initialValue, ...restProps }) => {
   return (
     <div>
       <label htmlFor={name}>{label}</label>
@@ -11,4 +11,4 @@ const FormikField = ({ name, label, ...restProps }) => {
   );
 };
 
-export default FormikField
+export default FormikField;

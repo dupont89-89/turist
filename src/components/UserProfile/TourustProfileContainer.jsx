@@ -7,7 +7,7 @@ function TourustProfileContainer(props) {
     
   return (
     <div>
-      <TourustProfile userId={props.userId} avatar={props.avatar} age={props.age} lastName={props.lastName} firstName={props.firstName} />
+      <TourustProfile tel={props.tel} sity={props.sity} userId={props.userId} avatar={props.avatar} age={props.age} lastName={props.lastName} firstName={props.firstName} />
     </div>
   )
 }
@@ -20,6 +20,8 @@ let mapStateToProps = (state) => {
     userId: state.user.dataUser.userId,
     avatar: state.user.dataUser.avatar,
     age: state.user.dataUser.age,
+    sity: state.user.dataUser.sity,
+    tel: state.user.dataUser.tel,
     };
   }
   

@@ -74,7 +74,13 @@ exports.getUserDataState = async (req, res) => {
 		}
 		if (updates.lastName) {
 		  user.lastName = updates.lastName;
-		}
+		} 
+		if (updates.sity) {
+			user.sity = updates.sity;
+		  }
+		  if (updates.tel) {
+			user.tel = updates.tel;
+		  }
 		if (updates.age) {
 			console.log(updates.age)
 			// Обновление age как объекта Date
