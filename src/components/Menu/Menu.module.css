@@ -1,0 +1,158 @@
+.menuBlockHeader .itemMenu a {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+.iconMenu::before {
+    content: '';
+    position: absolute;
+    top: 23px;
+    left: 45px;
+    width: 70px;
+    height: 70px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+}
+
+.itemMenu img {
+    width: 40px;
+}
+
+.itemMenu {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    grid-gap: 5px;
+    align-items: center;
+    padding: 10px;
+}
+
+.itemMenu span {
+    display: block;
+    color: #000;
+    font-size: 1.35rem;
+    text-align: left;
+}
+
+.textLink {
+    font-size: 18px;
+    text-align: center;
+    color: #000;
+    width: 100%;
+}
+
+.menuBlockHeader .textLink a:hover,
+.blockItemPodMenu a:hover .itemPodMenu {
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
+    -moz-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
+    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
+}
+
+.menuBlockHeader .textLink a {
+    display: block;
+    border-radius: 15px;
+    background-color: cornsilk;
+    border: 1px solid #ffc726;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.menuBlockHeader {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    align-items: stretch;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+}
+
+.blockPodMenu {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    z-index: 2;
+    left: 0;
+}
+
+.hrBlockPodMenu {
+    width: 100%;
+    height: 1px;
+    background: #1bac23;
+}
+
+.titlePodMen {
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+.itemPodMenu {
+    border: 2px solid #ffc725;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.titleItemPodMenu {
+    font-size: 1rem;
+}
+
+.numberItemPodMenu {
+    margin-left: 20px;
+    font-size: 1rem;
+}
+
+.itemPodMenu {
+    display: grid;
+    grid-template-columns: 95px 1fr;
+    grid-gap: 10px;
+}
+
+.iconPodMenu::before {
+    content: '';
+    position: absolute;
+    top: 23px;
+    left: 45px;
+    width: 50px;
+    height: 50px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+}
+
+.iconMenuSea {
+    background: url(../../assets/images/header/menu/icon-beach.png) no-repeat center center / 50px 50px;
+}
+
+.blockItemPodMenu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    row-gap: 30px;
+    column-gap: 30px;
+    padding: 30px;
+}
+
+.descriptionItemPodMenu {
+    font-size: 0.9rem;
+}
+
+.blockItemPodMenu a {
+    color: #000;
+}
+
+.headblockPodMenu {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+}
+
+.headblockPodMenu button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffc725;
+    border: 1px solid;
+    cursor: pointer;
+}

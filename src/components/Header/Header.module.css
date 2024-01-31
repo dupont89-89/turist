@@ -1,8 +1,8 @@
 header h1 {
   color: rgb(255 255 255);
-  font-size: 3rem;
+  font-size: 2.8rem;
   text-align: center;
-  width: 500px;
+  max-width: 660px;
 }
 
 .btnNewTours {
@@ -21,179 +21,43 @@ header h1 {
   transition: all 0.3s ease-out;
 }
 
-header {
-  height: 450px;
-}
-
-.h1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  padding: 50px 0;
-}
-
-.menuBlockHeader .itemMenu a {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-}
-
-.iconMenu::before {
-  content: '';
-  position: absolute;
-  top: 23px;
-  left: 45px;
-  width: 70px;
-  height: 70px;
-  background-size: 70px;
+.headerBackground {
+  background: url(/src/assets/images/header/mountains-in-the-background.jpg);
+  background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
+  height: 280px;
 }
 
-.iconMenuType::before {
-  background: url(../../assets/images/header/menu/tent.png) no-repeat center center / 70px 70px;
-}
-
-.iconMenuContry::before {
-  background: url(../../assets/images/header/menu/travel-map.png) no-repeat center center / 70px 70px;
-}
-
-.iconMenuHuman::before {
-  background: url(../../assets/images/header/menu/travel-map-search.png) no-repeat center center / 70px 70px;
-}
-
-.iconMenuTime::before {
-  background: url(../../assets/images/header/menu/icon-travel-time.png) no-repeat center center / 70px 70px;
-}
-
-.iconMenuBlog::before {
-  background: url(../../assets/images/header/menu/icon-travel-blog.png) no-repeat center center / 70px 70px;
-}
-
-.iconMenuNew::before {
-  background: url(../../assets/images/header/menu/travel-favorit.png) no-repeat center center / 70px 70px;
-}
-
-.textLink {
-  width: 162px;
-  height: 145px;
+.blockTopRatingTours {
   background-color: #fff;
-  border: 1px solid #ffc726;
-  font-size: 18px;
-  text-align: center;
-  color: #000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0 0 10px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
-  -moz-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
-  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2) inset;
-}
-
-.menuBlockHeader .itemMenu a:hover .textLink,
-.blockItemPodMenu a:hover .itemPodMenu {
-  background-color: cornsilk;
-}
-
-.menuBlockHeader {
-  display: grid;
-  grid-gap: 48px;
-  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-  align-items: stretch;
-  justify-items: center;
-  justify-content: center;
-  align-content: center;
-  position: relative;
-}
-
-.blockPodMenu {
-  position: absolute;
-  background-color: #fff;
-  width: 100%;
-  margin-top: 10px;
-  border-radius: 10px;
-  z-index: 2;
-  left: 0;
-}
-
-.hrBlockPodMenu {
-  width: 100%;
-  height: 1px;
-  background: #1bac23;
-}
-
-.titlePodMen {
-  font-size: 1.5rem;
-  padding: 20px;
-}
-
-.itemPodMenu {
-  border: 2px solid #ffc725;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
-.titleItemPodMenu {
-  font-size: 1rem;
+.headerTopRatingTours {
+  width: 100%;
 }
 
-.numberItemPodMenu {
-  margin-left: 20px;
-  font-size: 1rem;
-}
-
-.itemPodMenu {
-  display: grid;
-  grid-template-columns: 95px 1fr;
-  grid-gap: 10px;
-}
-
-.iconPodMenu::before {
-  content: '';
-  position: absolute;
-  top: 23px;
-  left: 45px;
-  width: 50px;
-  height: 50px;
-  background-size: 70px;
-  background-repeat: no-repeat;
-}
-
-.iconMenuSea {
-  background: url(../../assets/images/header/menu/icon-beach.png) no-repeat center center / 50px 50px;
-}
-
-.blockItemPodMenu {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  row-gap: 30px;
-  column-gap: 30px;
-  padding: 30px;
-}
-
-.descriptionItemPodMenu {
-  font-size: 0.9rem;
-}
-
-.blockItemPodMenu a {
+.blockTopRatingTours ul li a {
+  font-size: 18px;
   color: #000;
 }
 
-.headblockPodMenu {
-  display: grid;
-  grid-template-columns: 1fr 30px;
+.blockTopRatingTours ul li {
+  margin: 10px 0;
 }
 
-.headblockPodMenu button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #ffc725;
-  border: 1px solid;
-  cursor: pointer;
+.btnHeader {
+  display: grid;
+  grid-template-columns: 230px 230px;
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+.header {
+  margin-bottom: 40px;
+  padding: 15px;
 }
 
 .gridHeaderRowTwo {
@@ -201,6 +65,8 @@ header {
   grid-template-columns: 300px 1fr 300px;
   grid-gap: 30px;
   align-items: center;
+  align-content: center;
+  justify-items: center;
 }
 
 .iconUser img {
@@ -216,6 +82,7 @@ header {
 .name,
 .btnSigIn {
   text-align: center;
+  margin: 0 5px;
 }
 
 .name span {
@@ -245,7 +112,9 @@ header {
   background-color: #e99a10;
   color: #000;
   padding: 5px 10px;
+  margin: 0 5px;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 500;
+  display: block;
 }

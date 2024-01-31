@@ -99,6 +99,15 @@ body {
   line-height: 1;
   font-family: 'Geologica', sans-serif;
   background-color: #f6f7f7;
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 article,
@@ -163,24 +172,46 @@ ul {
   font-size: 1.0rem;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 .wrapperContent {
-  max-width: 1240px;
-  margin: auto;
-}
-.headerBackground {
-  background: url(/src/assets/images/header/mountains-in-the-background.jpg); 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 450px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: unset;
+  display: block;
 }
 
 /* стили для label */
 label {
   display: block;
   margin-bottom: 0.25rem;
+}
+
+header {
+  height: 100%;
+}
+
+.sidebarContent {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-gap: 30px;
+  align-items: start;
+}
+
+.sidebarGridBlock {
+  position: sticky;
+  top: 15px;
+}
+
+.siteContent {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
 }

@@ -11,6 +11,7 @@ import { getUser } from './api_request/api'
 import NewToursContainer from './components/NewTours/NewToursContainer'
 import TourustProfileContainer from './components/UserProfile/TourustProfileContainer'
 import UserPageContainer from './components/UserPage/UserPageContainer'
+import SidebarMenu from './components/Sidebar/SidebarMenu'
 
 function App({ setAuthSuccess, getUser, isAuthenticated }) {
   const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
@@ -36,19 +37,26 @@ function App({ setAuthSuccess, getUser, isAuthenticated }) {
 
   return (
     <div className='App'>
-      <div className='headerBackground'>
+      <HeaderContainer />
+      <div className='siteContent'>
         <div className='wrapperContent'>
-          <HeaderContainer />
-          <Routes>
-            {isAuthenticated && <Route path='newtours/' exact element={<NewToursContainer />} />}
-            {isAuthenticated && <Route path='profile/' exact element={<TourustProfileContainer />} />}
-            <Route path='/' element={<ContainerTourCatalog />} />
-            <Route path='user/*' element={<UserPageContainer />} />
-            <Route path='signup' element={<SignUp />} />
-            <Route path='login' exact element={<LoginContainer />} />
-            <Route path='newtours/' element={<Navigate replace to='/login' />} />
-            <Route path='profile/' element={<Navigate replace to='/login' />} />
-          </Routes>
+          <div className='sidebarContent'>
+            <div className='sidebarGridBlock'>
+              <SidebarMenu />
+            </div>
+            <div className='contenGridBlock'>
+              <Routes>
+                {isAuthenticated && <Route path='newtours/' exact element={<NewToursContainer />} />}
+                {isAuthenticated && <Route path='profile/' exact element={<TourustProfileContainer />} />}
+                <Route path='/' element={<ContainerTourCatalog />} />
+                <Route path='user/*' element={<UserPageContainer />} />
+                <Route path='signup' element={<SignUp />} />
+                <Route path='login' exact element={<LoginContainer />} />
+                <Route path='newtours/' element={<Navigate replace to='/login' />} />
+                <Route path='profile/' element={<Navigate replace to='/login' />} />
+              </Routes>
+            </div>
+          </div>
         </div>
       </div>
     </div>
