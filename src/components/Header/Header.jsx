@@ -3,32 +3,13 @@ import s from '../Header/Header.module.css'
 import { Link } from 'react-router-dom'
 import avatar from '../../assets/images/User/traveler.png'
 import ButtonSearchTuristHeader from '../Buttons/ButtonSearchTuristHeader'
+import TopFive from '../Rating/TopFive'
 
 export default function Header(props) {
   return (
     <header>
       <div className={s.gridHeaderRowTwo}>
-        <div className={s.headerTopRatingTours}>
-          <div className={s.blockTopRatingTours}>
-            <ul>
-              <li>
-                <Link>Сочи</Link>
-              </li>
-              <li>
-                <Link>Байкал</Link>
-              </li>
-              <li>
-                <Link>Казань</Link>
-              </li>
-              <li>
-                <Link>Турция</Link>
-              </li>
-              <li>
-                <Link>Египет</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <TopFive />
         <div className={s.h1}>
           <Link to='/'>
             <h1>Поиск попутчиков и сбор групп в путешествия</h1>

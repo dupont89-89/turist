@@ -1,0 +1,54 @@
+.blockTopRatingTours {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.headerTopRatingTours {
+    width: 100%;
+}
+
+.blockTopRatingTours ul li a {
+    font-size: 18px;
+    color: #000;
+}
+
+.blockTopRatingTours ul li {
+    margin: 10px 0;
+}
+
+.linkHeaderTop a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 10px;
+
+}
+
+.linkHeaderTop a:hover span.numberLinkTop,
+.linkHeaderTop a:hover span.nameLinkTop {
+    color: #fff;
+
+}
+
+.linkHeaderTop a:hover {
+    background-color: #ad1919;
+    border-radius: 40px;
+
+}
+
+.linkHeaderTop span.numberLinkTop {
+    font-size: 18px;
+    padding-left: 8px;
+    border-radius: 50%;
+    border: 2px solid #ad1919;
+    line-height: 27px;
+    width: 30px;
+    height: 30px;
+}
+
+.titleTopRatingTours {
+    font-size: 19px;
+    color: #ad1919;
+}

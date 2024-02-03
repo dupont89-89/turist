@@ -29,25 +29,6 @@ header h1 {
   height: 280px;
 }
 
-.blockTopRatingTours {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.headerTopRatingTours {
-  width: 100%;
-}
-
-.blockTopRatingTours ul li a {
-  font-size: 18px;
-  color: #000;
-}
-
-.blockTopRatingTours ul li {
-  margin: 10px 0;
-}
-
 .btnHeader {
   display: grid;
   grid-template-columns: 230px 230px;
