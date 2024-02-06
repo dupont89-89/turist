@@ -3,15 +3,31 @@ import s from './TourCatalog.module.css'
 import CartTourCatalog from '../CartTour/CartTourCatalog'
 import ButtonFiltr from '../Buttons/ButtonFiltr'
 import { calculateAge } from '../../function/userAge'
+import { Link } from 'react-router-dom'
 
 export default function TourCatalog(props) {
   const [isReversed, setIsReversed] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
   const tourCopyRevers = isReversed ? [...props.toursItem].reverse() : [...props.toursItem]
 
-  const toogleButton = () => {
-    setIsReversed(!isReversed)
+  const toogleButtonReverse = () => {
+    setIsReversed(true)
   }
+
+  const toogleButtonNormal = () => {
+    setIsReversed(false)
+  }
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
+
+  console.log(isHovered)
 
   let tours = tourCopyRevers.map((tour) => {
     let age = calculateAge(tour.age) // Используем функцию calculateAge
@@ -51,11 +67,20 @@ export default function TourCatalog(props) {
   return (
     <div className={s.contentCartTours}>
       <div className={s.itemCartTours}>
-        <div className={s.blockFiltrBtn}>
-          <span className={s.btnTitle}>Порядок отображеня</span>
-          <ButtonFiltr onClick={toogleButton}>
-            {isReversed ? <span>По дате добавления</span> : <span>Показать новые</span>}
-          </ButtonFiltr>
+        <div className={s.blockFiltrBtn} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <span className={`${s.btnPoryadok}`}>
+            <Link to='#'>Порядок отображения</Link>
+          </span>
+          {isHovered && (
+            <div className={s.podMenuPorydok}>
+              <Link onClick={toogleButtonNormal}>
+                <span className={`${isReversed ? '' : s.hovered}`}>По дате добавления</span>
+              </Link>
+              <Link onClick={toogleButtonReverse}>
+                <span className={`${isReversed ? s.hovered : ''}`}>Показать новые</span>
+              </Link>
+            </div>
+          )}
         </div>
         {tours}
       </div>

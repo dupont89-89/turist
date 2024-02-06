@@ -1,5 +1,5 @@
-const HOST = 'http://localhost'; 
-const PORT = 5000; 
+const HOST = 'http://localhost'
+const PORT = 5000
 module.exports = {
   PORT: 5000,
   HOST: 'http://localhost',
@@ -7,4 +7,4 @@ module.exports = {
   SERVER_URL: `${HOST}:${PORT}`,
   CLIENT_ORIGIN: 'http://localhost:3000',
   secretKey: 'MySuperSecretKeyForJWT123!@#',
-};
+}

@@ -178,6 +178,12 @@ ul {
   box-sizing: border-box;
 }
 
+hr {
+  width: 100%;
+  color: rgb(253, 207, 55);
+  size: 2;
+}
+
 .wrapperContent {
   margin: 0;
   padding: 0;
@@ -206,6 +212,7 @@ header {
 .sidebarGridBlock {
   position: sticky;
   top: 15px;
+  z-index: 1;
 }
 
 .siteContent {
@@ -214,4 +221,63 @@ header {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+}
+
+.contenGridBlock {
+  position: relative;
+  z-index: 0;
+}
+
+.VkIdWebSdk__button_reset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+.VkIdWebSdk__button {
+  background: #0077ff;
+  cursor: pointer;
+  transition: all .1s ease-out;
+}
+
+.VkIdWebSdk__button:hover {
+  opacity: 0.8;
+}
+
+.VkIdWebSdk__button:active {
+  opacity: .7;
+  transform: scale(.97);
+}
+
+.VkIdWebSdk__button {
+  border-radius: 8px;
+  width: 100%;
+  min-height: 44px;
+}
+
+.VkIdWebSdk__button_container {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+}
+
+.VkIdWebSdk__button_icon+.VkIdWebSdk__button_text {
+  margin-left: -28px;
+}
+
+.VkIdWebSdk__button_text {
+  display: flex;
+  font-family: -apple-system, system-ui, "Helvetica Neue", Roboto, sans-serif;
+  flex: 1;
+  justify-content: center;
+  color: #ffffff;
 }

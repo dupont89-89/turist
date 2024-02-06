@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import avatar from '../../assets/images/User/traveler.png'
 import ButtonSearchTuristHeader from '../Buttons/ButtonSearchTuristHeader'
 import TopFive from '../Rating/TopFive'
+import MenuProfilHeader from '../Menu/MenuProfilHeader'
 
 export default function Header(props) {
   return (
@@ -41,9 +42,7 @@ export default function Header(props) {
             </span>
           </div>
           {props.isAuthenticated ? (
-            <span className={s.linkProfil}>
-              <Link to='profile/'>Профиль</Link>
-            </span>
+            <MenuProfilHeader />
           ) : (
             <div className={s.btnSigIn}>
               <Link to='login'>Вход/Регистрация</Link>

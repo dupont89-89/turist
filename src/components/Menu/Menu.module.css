@@ -72,12 +72,14 @@
 
 .blockPodMenu {
     position: absolute;
-    background-color: #fff;
-    width: 100%;
+    width: 650px;
     margin-top: 10px;
     border-radius: 10px;
     z-index: 2;
-    left: 0;
+    left: 329px;
+    border: 2px solid;
+    background-color: #fffcf3;
+    top: 44px;
 }
 
 .hrBlockPodMenu {
@@ -155,4 +157,49 @@
     background-color: #ffc725;
     border: 1px solid;
     cursor: pointer;
+}
+
+.linkProfil {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.linkProfil a {
+    background-color: #e99a10;
+    width: 140px;
+    color: #000;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 500;
+    display: block;
+}
+
+.linkProfil {
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+}
+
+.linkProfil .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.linkProfil:hover .submenu {
+    display: block;
+}
+
+.linkProfileHeader {
+    border-radius: 5px;
+}
+
+.linkProfil:hover .linkProfileHeader {
+    border-radius: 5px 5px 0 0;
+}
+
+.linkProfil:hover .linkBottomHeader {
+    border-radius: 0 0 5px 5px;
 }
