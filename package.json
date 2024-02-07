@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "proxy": "https://localhost:5000",
   "private": true,
   "dependencies": {
     "@clerk/clerk-react": "^4.26.1",

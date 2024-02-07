@@ -85,7 +85,6 @@ exports.uploadsDataUser = async (req, res) => {
         user.age = new Date(updates.age)
       }
       if (updates.vip !== undefined) {
-        console.log('Updating VIP status:', updates.vip)
         user.vip = updates.vip
       }
 
@@ -93,7 +92,6 @@ exports.uploadsDataUser = async (req, res) => {
 
       // Сохраните обновленные данные пользователя в базе данных
       await user.save()
-      console.log('Updated user:', user)
 
       // Отправьте успешный ответ
       res.status(200).json({ message: 'User data updated successfully' })

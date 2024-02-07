@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
 import { signUpUser } from '../../../api_request/api'
-import SignUpVk from './SignUpVk'
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -100,7 +99,6 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <SignUpVk />
     </div>
   )
 }

@@ -6,7 +6,7 @@ VKID.Config.set({
   redirectUrl: 'https://localhost', // Адрес для перехода после авторизации.
 })
 
-export default function SignUpVk() {
+export default function SignInVk() {
   // Обработчик клика.
   const handleClick = () => {
     // Открытие авторизации.
