@@ -33,7 +33,7 @@ export default function Header(props) {
           </div>
         </div>
         <div className={s.helloName}>
-          <div className={s.iconUser}>
+          <div className={props.vip ? s.iconUserVip : s.iconUser}>
             {props.avatar ? <img src={props.avatar} alt='' /> : <img src={avatar} alt='' />}
           </div>
           <div className={s.name}>

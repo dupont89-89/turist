@@ -35,58 +35,60 @@ export default function Menu(props) {
   }
 
   return (
-    <div className={s.menuBlockHeader} ref={menuRef}>
-      <div className={s.textLink}>
-        <Link onClick={() => handleLinkClick('type')} to='/#1'>
-          <div className={s.itemMenu}>
-            <img src={iconMenuType} alt='Вид отдыха' />
-            <span className={s.textLinkMenu}>Вид отдыха</span>
-          </div>
-        </Link>
-        {activeComponent === 'type' && <BoxMenuType handleLinkClick={handleLinkClick} />}
-      </div>
-      <div className={s.textLink}>
-        <Link onClick={() => handleLinkClick('contry')} to='/#2'>
-          <div className={s.itemMenu}>
-            <img src={iconMenuContry} alt='Направления' />
-            <span className={s.textLinkMenu}>Направления</span>
-          </div>
-        </Link>
-        {activeComponent === 'contry' && <BoxMenuContry handleLinkClick={handleLinkClick} />}
-      </div>
-      <div className={s.textLink}>
-        <Link onClick={() => handleLinkClick('human')} to='/#3'>
-          <div className={s.itemMenu}>
-            <img src={iconMenuHuman} alt='Кого ищем' />
-            <span className={s.textLinkMenu}>Кого ищем</span>
-          </div>
-        </Link>
-        {activeComponent === 'human' && <BoxMenuHuman handleLinkClick={handleLinkClick} />}
-      </div>
-      <div className={s.textLink}>
-        <Link onClick={() => handleLinkClick('time')} to='/#4'>
-          <div className={s.itemMenu}>
-            <img src={iconMenuTime} alt='Когда в путь' />
-            <span className={s.textLinkMenu}>Когда в путь</span>
-          </div>
-        </Link>
-        {activeComponent === 'time' && <BoxMenuTime handleLinkClick={handleLinkClick} />}
-      </div>
-      <div className={s.textLink}>
-        <Link to='/blog/'>
-          <div className={s.itemMenu}>
-            <img src={iconMenuBlog} alt='Отчеты пользователей' />
-            <span className={s.textLinkMenu}>Отчеты пользователей</span>
-          </div>
-        </Link>
-      </div>
-      <div className={s.textLink}>
-        <Link to='/newtur'>
-          <div className={s.itemMenu}>
-            <img src={iconMenuFavorite} alt='Последние публикации' />
-            <span className={s.textLinkMenu}>Последние публикации</span>
-          </div>
-        </Link>
+    <div>
+      {activeComponent === 'type' && <BoxMenuType handleLinkClick={handleLinkClick} />}
+      <div className={s.menuBlockHeader} ref={menuRef}>
+        <div className={s.textLink}>
+          <Link onClick={() => handleLinkClick('type')} to='#1'>
+            <div className={s.itemMenu}>
+              <img src={iconMenuType} alt='Вид отдыха' />
+              <span className={s.textLinkMenu}>Вид отдыха</span>
+            </div>
+          </Link>
+        </div>
+        <div className={s.textLink}>
+          <Link onClick={() => handleLinkClick('contry')} to='#2'>
+            <div className={s.itemMenu}>
+              <img src={iconMenuContry} alt='Направления' />
+              <span className={s.textLinkMenu}>Направления</span>
+            </div>
+          </Link>
+          {activeComponent === 'contry' && <BoxMenuContry handleLinkClick={handleLinkClick} />}
+        </div>
+        <div className={s.textLink}>
+          <Link onClick={() => handleLinkClick('human')} to='#3'>
+            <div className={s.itemMenu}>
+              <img src={iconMenuHuman} alt='Кого ищем' />
+              <span className={s.textLinkMenu}>Кого ищем</span>
+            </div>
+          </Link>
+          {activeComponent === 'human' && <BoxMenuHuman handleLinkClick={handleLinkClick} />}
+        </div>
+        <div className={s.textLink}>
+          <Link onClick={() => handleLinkClick('time')} to='#4'>
+            <div className={s.itemMenu}>
+              <img src={iconMenuTime} alt='Когда в путь' />
+              <span className={s.textLinkMenu}>Когда в путь</span>
+            </div>
+          </Link>
+          {activeComponent === 'time' && <BoxMenuTime handleLinkClick={handleLinkClick} />}
+        </div>
+        <div className={s.textLink}>
+          <Link to='/blog/'>
+            <div className={s.itemMenu}>
+              <img src={iconMenuBlog} alt='Отчеты пользователей' />
+              <span className={s.textLinkMenu}>Отчеты пользователей</span>
+            </div>
+          </Link>
+        </div>
+        <div className={s.textLink}>
+          <Link to='/newtur'>
+            <div className={s.itemMenu}>
+              <img src={iconMenuFavorite} alt='Последние публикации' />
+              <span className={s.textLinkMenu}>Последние публикации</span>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   )

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import AddVipUser from './AddVipUser'
 
 function AddVipUserContainer(props) {
-  debugger
   return <AddVipUser userId={props.userId} vip={props.vip} />
 }
 

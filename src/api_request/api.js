@@ -45,7 +45,6 @@ export const addUserAvatar = async (avatar, userId) => {
 }
 
 export const updateUserData = async (userId, updates) => {
-  debugger
   try {
     const response = await instance.patch(`user/uploads-data-user?userId=${userId}`, updates)
     // Обработка успешного ответа
