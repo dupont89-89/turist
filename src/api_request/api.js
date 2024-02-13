@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setDataUser } from '../redux/user-reducer/user-reducer'
+import { setAllDataUser, setDataUser } from '../redux/user-reducer/user-reducer'
 
 const instance = axios.create({
   baseURL: 'https://localhost:5000',
@@ -31,6 +31,21 @@ export const getUser = (userId) => {
       const userData = response.data.userData
       // Dispatch the setDataUser action to update the user data in the Redux store
       dispatch(setDataUser(userData))
+      return response.data
+    } catch (error) {
+      // Handle errors here, e.g., dispatch an error action
+      console.error('Error fetching user data:', error)
+    }
+  }
+}
+
+export const getAllUser = () => {
+  return async (dispatch) => {
+    try {
+      const response = await instance.get('/user/get-all-user')
+      const allUser = response.data
+      // Dispatch the setDataUser action to update the user data in the Redux store
+      dispatch(setAllDataUser(allUser))
       return response.data
     } catch (error) {
       // Handle errors here, e.g., dispatch an error action

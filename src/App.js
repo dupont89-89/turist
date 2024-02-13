@@ -7,19 +7,20 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setAuthSuccess } from './redux/user-reducer/user-reducer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import { getUser } from './api_request/api'
+import { getAllUser, getUser } from './api_request/api'
 import NewToursContainer from './components/NewTours/NewToursContainer'
 import TourustProfileContainer from './components/UserProfile/TourustProfileContainer'
 import UserPageContainer from './components/UserPage/UserPageContainer'
 import SidebarMenu from './components/Sidebar/SidebarMenu'
 import AddVipUserContainer from './components/UserProfile/VipStatus/AddVipUserContainer'
 
-function App({ setAuthSuccess, getUser, isAuthenticated }) {
+function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser }) {
   const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
 
   useEffect(() => {
     // Попытка получить данные пользователя из localStorage при инициализации приложения
     // const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    getAllUser()
     const userId = JSON.parse(localStorage.getItem('userId'))
     if (userId) {
       // Сохраняем данные пользователя в Redux-состоянии
@@ -70,6 +71,7 @@ function App({ setAuthSuccess, getUser, isAuthenticated }) {
 const mapDispatchToProps = {
   setAuthSuccess,
   getUser,
+  getAllUser,
 }
 
 let mapStateToProps = (state) => {

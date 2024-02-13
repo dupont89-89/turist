@@ -15,7 +15,6 @@ import TagUser from './CartTourElements/TagUser'
 import DataAddToursCartLIst from './CartTourElements/DataAddToursCartLIst'
 
 export default function CartTourCatalog(props) {
-
   return (
     <div className={s.cartBlock}>
       <DataAddToursCartLIst date={props.date} />
@@ -23,7 +22,7 @@ export default function CartTourCatalog(props) {
       <DataBlockCartList start_date={props.start_date} end_date={props.end_date} />
       <div className={s.descriptionCartBlock}>
         <div className={s.leftBlockCartList}>
-          <AvatarUserCartList avatar={props.avatar} />
+          <AvatarUserCartList vip={props.vip} avatar={props.avatar} />
           <IconSearchUsersToursCartList looking={props.looking} />
         </div>
         <div className={s.rightBlockCartList}>
@@ -31,8 +30,16 @@ export default function CartTourCatalog(props) {
           <LevelTrustUserCartList />
           <RegionsUserCartList city={props.city} age={props.age} />
           <div className={s.blockDescriptionCartList}>
-            <FotoToursCartList images={props.images} /> 
-            <DescriptionToursCartList foot={props.foot} bike={props.bike} car={props.car} air={props.air} train={props.train} goal={props.goal} text={props.text} />
+            <FotoToursCartList images={props.images} />
+            <DescriptionToursCartList
+              foot={props.foot}
+              bike={props.bike}
+              car={props.car}
+              air={props.air}
+              train={props.train}
+              goal={props.goal}
+              text={props.text}
+            />
           </div>
           <div>
             <TagUser heshtag={props.heshtag} />
@@ -40,7 +47,12 @@ export default function CartTourCatalog(props) {
         </div>
       </div>
       <div className={s.linkBtnCartList}>
-        <WishLinkItemToursCartList tourId={props.toursId} addFavouritesAction={props.addFavouritesAction} Ihave={props.Ihave} total={props.total} />
+        <WishLinkItemToursCartList
+          tourId={props.toursId}
+          addFavouritesAction={props.addFavouritesAction}
+          Ihave={props.Ihave}
+          total={props.total}
+        />
         <ButtonItemToursCartList />
       </div>
     </div>

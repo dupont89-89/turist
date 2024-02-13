@@ -105,3 +105,13 @@ exports.uploadsDataUser = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' })
   }
 }
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find().select('-password') // Исключаем поле "password"
+    res.json(allUsers)
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    res.status(500).send('Something Went Wrong')
+  }
+}
