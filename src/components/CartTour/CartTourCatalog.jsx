@@ -28,7 +28,7 @@ export default function CartTourCatalog(props) {
         <div className={s.rightBlockCartList}>
           <NameUserCartList userId={props.userId} firstName={props.firstName} lastName={props.lastName} />
           <LevelTrustUserCartList />
-          <RegionsUserCartList city={props.city} age={props.age} />
+          <RegionsUserCartList sity={props.sity} age={props.age} />
           <div className={s.blockDescriptionCartList}>
             <FotoToursCartList images={props.images} />
             <DescriptionToursCartList
@@ -48,10 +48,11 @@ export default function CartTourCatalog(props) {
       </div>
       <div className={s.linkBtnCartList}>
         <WishLinkItemToursCartList
-          tourId={props.toursId}
-          addFavouritesAction={props.addFavouritesAction}
-          Ihave={props.Ihave}
-          total={props.total}
+          tourId={props.tourId}
+          loginUserId={props.loginUserId}
+          fetchFavoriteTours={props.fetchFavoriteTours}
+          favorites={props.favorites}
+          favoriteTourCounts={props.countfavoriteTourCounts}
         />
         <ButtonItemToursCartList />
       </div>

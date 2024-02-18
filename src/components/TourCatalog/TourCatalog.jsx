@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import s from './TourCatalog.module.css'
 import CartTourCatalog from '../CartTour/CartTourCatalog'
@@ -6,8 +6,19 @@ import { calculateAge } from '../../function/userAge'
 import { Link } from 'react-router-dom'
 
 export default function TourCatalog(props) {
+  const { toursItem, countFavoriteTours, fetchFavoriteTours, favorites, loginUserId, favoriteTourCounts } = props
   const [isReversed, setIsReversed] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+
+  useEffect(() => {
+    // Проверяем, что toursItem не пустой
+    if (toursItem.length > 0) {
+      // Получаем массив идентификаторов туров
+      const tourIdsArray = toursItem.map((tour) => tour._id)
+      // Вызываем функцию для подсчета количества избранных туров
+      countFavoriteTours(tourIdsArray)
+    }
+  }, [toursItem, countFavoriteTours])
 
   const users = useSelector((state) => state.user.allUser) // Получаем всех пользователей из Redux состояния
   const usersArray = Object.values(users)
@@ -23,7 +34,9 @@ export default function TourCatalog(props) {
     return null // Или какое-то другое действие, в зависимости от вашей логики
   }
 
-  const tourCopyRevers = isReversed ? [...props.toursItem].reverse() : [...props.toursItem]
+  // После useEffect следует ваш основной код компонента
+
+  const tourCopyRevers = isReversed ? [...toursItem].reverse() : [...toursItem]
 
   const toogleButtonReverse = () => {
     setIsReversed(true)
@@ -41,26 +54,36 @@ export default function TourCatalog(props) {
     setIsHovered(false)
   }
 
+  let tourCountsMap = {}
+  favoriteTourCounts.forEach((item) => {
+    tourCountsMap[item._id] = item.count
+  })
+
   let tours = tourCopyRevers.map((tour) => {
-    const user = usersArray.find((user) => user._id === tour.userId) // Находим пользователя по userId
-    const avatar = user ? user.avatar : '' // Получаем аватар пользователя
-    const lastName = user ? user.lastName : '' // Получаем аватар пользователя
-    const firstName = user ? user.firstName : '' // Получаем аватар пользователя
-    const city = user ? user.city : '' // Получаем аватар пользователя
+    const user = usersArray.find((user) => user._id === tour.userId)
+    const avatar = user ? user.avatar : ''
+    const lastName = user ? user.lastName : ''
+    const firstName = user ? user.firstName : ''
+    const sity = user ? user.sity : ''
     const vip = user.vip
     let age = calculateAge(user.age)
 
+    let isFavorite = favorites.some((favorite) => favorite.userId === loginUserId && favorite.tourId === tour._id)
+    let countfavoriteTourCounts = tourCountsMap[tour._id] || 0 // Получаем количество добавлений в избранное для текущего тура
+
     return (
       <CartTourCatalog
+        isFavorite={isFavorite}
+        loginUserId={loginUserId}
         age={age}
         key={tour._id}
         userId={tour.userId}
-        toursId={tour._id}
+        tourId={tour._id}
         lastName={lastName}
         firstName={firstName}
-        city={city}
+        sity={sity}
         places={tour.places}
-        avatar={avatar} // Передаем полученный аватар
+        avatar={avatar}
         text={tour.text}
         images={tour.images[0]}
         goal={tour.goal}
@@ -79,8 +102,9 @@ export default function TourCatalog(props) {
         end_date={tour.end_date}
         date={tour.date}
         favourites={tour.favourites}
-        addFavouritesAction={props.addFavouritesAction}
+        fetchFavoriteTours={fetchFavoriteTours}
         vip={vip}
+        countfavoriteTourCounts={countfavoriteTourCounts}
       />
     )
   })

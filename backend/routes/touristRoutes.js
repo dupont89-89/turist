@@ -1,6 +1,8 @@
 const express = require('express')
 const multer = require('multer')
 const touristController = require('../controllers/touristController')
+const FavoriteTourController = require('../controllers/FavoriteTourController')
+
 const { v4: uuidv4 } = require('uuid')
 
 const storage = multer.diskStorage({
@@ -20,6 +22,8 @@ const router = express.Router()
 router.get('/', touristController.checkServer)
 router.post('/newsetdatatours', upload.single('images'), touristController.addTouristData)
 router.get('/gettours', touristController.getTours)
-//router.get('/getdatauserstours', touristController.getDataUserTours)
+router.post('/add-favorite-tour', FavoriteTourController.addFavoriteTour)
+router.get('/favorite-tours/:userId', FavoriteTourController.getFavoriteToursByUserId)
+router.post('/favorite-tours-count', FavoriteTourController.getCountByTourIds)
 
 module.exports = router

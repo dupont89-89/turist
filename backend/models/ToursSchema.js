@@ -1,14 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 // Schema и модель для тура
 const ToursSchema = new mongoose.Schema({
   userId: String,
-  firstName: String,
-  lastName: String,
-  age: Date,
-  avatar: String,
   level: String,
-  city: String,
   looking: String,
   kinder: Boolean,
   text: String,
@@ -36,6 +31,6 @@ const ToursSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+})
 
-module.exports = mongoose.model('tours', ToursSchema);
+module.exports = mongoose.model('tours', ToursSchema)

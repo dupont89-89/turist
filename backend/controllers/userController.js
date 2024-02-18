@@ -36,7 +36,6 @@ exports.getUserDataState = async (req, res) => {
         socialNetwork: user.socialNetwork, // Другие данные, которые вы хотите добавить
         vip: user.vip,
       }
-      console.log(userData)
       res.status(200).json({ userData }) // Assuming you want to send the user data as JSON
     } else {
       // User not found, send a 404 Not Found response
@@ -56,8 +55,6 @@ exports.uploadsDataUser = async (req, res) => {
 
     // Извлеките обновления пользователя из тела запроса
     const updates = req.body
-
-    console.log(updates)
 
     // Проверьте, есть ли идентификатор пользователя и данные для обновления
     if (!userId || Object.keys(updates).length === 0) {

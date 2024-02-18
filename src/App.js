@@ -7,14 +7,14 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setAuthSuccess } from './redux/user-reducer/user-reducer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import { getAllUser, getUser } from './api_request/api'
+import { fetchFavoriteTours, getAllUser, getUser } from './api_request/api'
 import NewToursContainer from './components/NewTours/NewToursContainer'
 import TourustProfileContainer from './components/UserProfile/TourustProfileContainer'
 import UserPageContainer from './components/UserPage/UserPageContainer'
 import SidebarMenu from './components/Sidebar/SidebarMenu'
 import AddVipUserContainer from './components/UserProfile/VipStatus/AddVipUserContainer'
 
-function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser }) {
+function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavoriteTours }) {
   const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
 
   useEffect(() => {
@@ -28,6 +28,7 @@ function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser }) {
       setAuthSuccess()
       // getUser(userId)
       getUser(userId)
+      fetchFavoriteTours(userId)
     }
     setIsLoading(false)
   }, [isAuthenticated])
@@ -72,6 +73,7 @@ const mapDispatchToProps = {
   setAuthSuccess,
   getUser,
   getAllUser,
+  fetchFavoriteTours,
 }
 
 let mapStateToProps = (state) => {
