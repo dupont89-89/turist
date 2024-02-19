@@ -23,6 +23,7 @@ router.get('/', touristController.checkServer)
 router.post('/newsetdatatours', upload.single('images'), touristController.addTouristData)
 router.get('/gettours', touristController.getTours)
 router.post('/add-favorite-tour', FavoriteTourController.addFavoriteTour)
+router.post('/delete-favorite-tours', FavoriteTourController.delCountByTour)
 router.get('/favorite-tours/:userId', FavoriteTourController.getFavoriteToursByUserId)
 router.post('/favorite-tours-count', FavoriteTourController.getCountByTourIds)
 

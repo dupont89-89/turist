@@ -51,8 +51,10 @@ export default function CartTourCatalog(props) {
           tourId={props.tourId}
           loginUserId={props.loginUserId}
           fetchFavoriteTours={props.fetchFavoriteTours}
-          favorites={props.favorites}
+          isFavorite={props.isFavorite}
           favoriteTourCounts={props.countfavoriteTourCounts}
+          toursItem={props.toursItem}
+          countFavoriteTours={props.countFavoriteTours}
         />
         <ButtonItemToursCartList />
       </div>

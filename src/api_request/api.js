@@ -110,6 +110,16 @@ export const addTourFavoriteUser = async (userId, tourId, data) => {
   }
 }
 
+export const delTourFavoriteUser = async (userId, tourId) => {
+  try {
+    const response = await instance.post(`/tours/delete-favorite-tours`, { userId, tourId })
+    return response.data
+  } catch (error) {
+    console.error('Error adding tour to favorites:', error)
+    throw error // Пробросить ошибку для дальнейшей обработки
+  }
+}
+
 export const fetchFavoriteTours = (userId) => {
   return async (dispatch) => {
     try {
@@ -129,7 +139,6 @@ export const countFavoriteTours = (tourIdsArray) => {
     try {
       const response = await instance.post(`/tours/favorite-tours-count`, { tourIds: tourIdsArray })
       const countTours = response.data.counts // Предполагая, что сервер возвращает объект с массивом counts
-      debugger
       // Dispatch the setFavoriteTours action to update the favorite tours data in the Redux store
       dispatch(setDataCountFavoriteTours(countTours))
     } catch (error) {

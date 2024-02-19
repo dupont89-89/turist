@@ -33,6 +33,25 @@ exports.addFavoriteTour = async (req, res) => {
   }
 }
 
+exports.delCountByTour = async (req, res) => {
+  try {
+    const userId = req.body.userId
+    const tourId = req.body.tourId
+
+    // Найти и удалить запись, где userId и tourId совпадают
+    const deletedRecord = await FavoriteTour.findOneAndDelete({ userId, tourId })
+
+    if (deletedRecord) {
+      res.status(200).json({ success: true, message: 'Record deleted successfully' })
+    } else {
+      res.status(404).json({ success: false, message: 'Record not found' })
+    }
+  } catch (error) {
+    console.error('Error deleting record:', error)
+    res.status(500).json({ success: false, error: error.message })
+  }
+}
+
 exports.getFavoriteToursByUserId = async (req, res) => {
   try {
     // Получаем userId из параметров запроса
@@ -54,25 +73,12 @@ exports.getCountByTourIds = async (req, res) => {
   try {
     // Получите массив всех tourId, для которых нужно подсчитать количество избранных туров
     const { tourIds } = req.body
-    console.log('Полученные tourIds:', tourIds)
-
-    // Проверка существования записей о турах в базе данных
-    for (const tourId of tourIds) {
-      const tour = await FavoriteTour.findOne({ tourId: tourId }) // Предположим, что модель тура называется Tour
-      if (tour) {
-        console.log(`Тур с идентификатором ${tourId} найден:`)
-        console.log(tour)
-      } else {
-        console.log(`Тур с идентификатором ${tourId} не найден`)
-      }
-    }
 
     // Используйте агрегацию MongoDB для подсчета общего количества избранных туров для каждого tourId
     const counts = await FavoriteTour.aggregate([
       { $match: { tourId: { $in: tourIds.map((id) => new mongoose.Types.ObjectId(id)) } } },
       { $group: { _id: '$tourId', count: { $sum: 1 } } },
     ])
-    console.log('Counts:', counts)
 
     // Верните массив объектов, содержащих tourId и соответствующее количество избранных туров
     res.status(200).json({ counts })

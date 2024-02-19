@@ -5,20 +5,38 @@ import CartTourCatalog from '../CartTour/CartTourCatalog'
 import { calculateAge } from '../../function/userAge'
 import { Link } from 'react-router-dom'
 
-export default function TourCatalog(props) {
-  const { toursItem, countFavoriteTours, fetchFavoriteTours, favorites, loginUserId, favoriteTourCounts } = props
+export default function TourCatalog({
+  toursItem,
+  countFavoriteTours,
+  fetchFavoriteTours,
+  favorites,
+  loginUserId,
+  favoriteTourCounts,
+}) {
+  // const { fetchFavoriteTours, favorites, loginUserId, favoriteTourCounts } = props;
   const [isReversed, setIsReversed] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
+  // useEffect(() => {
+  //   if (toursItem.length > 0) {
+  //     const tourIdsArray = toursItem.map((tour) => tour._id)
+  //     countFavoriteTours(tourIdsArray)
+  //   }
+  // }, [toursItem, countFavoriteTours])
+
+  // Остальной код компонента остается без изменений
+
   useEffect(() => {
-    // Проверяем, что toursItem не пустой
     if (toursItem.length > 0) {
-      // Получаем массив идентификаторов туров
       const tourIdsArray = toursItem.map((tour) => tour._id)
-      // Вызываем функцию для подсчета количества избранных туров
       countFavoriteTours(tourIdsArray)
     }
-  }, [toursItem, countFavoriteTours])
+  }, [toursItem, countFavoriteTours]) // Здесь добавлен countFavoriteTours в зависимости массива
+
+  // if (toursItem.length > 0) {
+  //   const tourIdsArray = toursItem.map((tour) => tour._id)
+  //   countFavoriteTours(tourIdsArray)
+  // }
 
   const users = useSelector((state) => state.user.allUser) // Получаем всех пользователей из Redux состояния
   const usersArray = Object.values(users)
@@ -101,10 +119,11 @@ export default function TourCatalog(props) {
         start_date={tour.start_date}
         end_date={tour.end_date}
         date={tour.date}
-        favourites={tour.favourites}
         fetchFavoriteTours={fetchFavoriteTours}
         vip={vip}
         countfavoriteTourCounts={countfavoriteTourCounts}
+        toursItem={toursItem}
+        countFavoriteTours={countFavoriteTours}
       />
     )
   })
