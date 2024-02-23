@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import NewTours from './NewTours'
 
 function NewToursContainer(props) {
+  useEffect(() => {
+    document.title = 'Добавить новый тур для поиска попутчиков'
+    // Вызываем загрузку туров при монтировании компонента
+  }, [])
   return (
     <div>
       <NewTours userId={props.userId} />

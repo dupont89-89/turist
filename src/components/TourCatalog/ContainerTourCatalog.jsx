@@ -2,10 +2,11 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import TourCatalog from './TourCatalog'
 import { getToursCatalog } from '../../redux/tour-reducer/tour-reducer'
-import { addTourFavoriteUser, countFavoriteTours, fetchFavoriteTours } from '../../api_request/api'
+import { countFavoriteTours, fetchFavoriteTours } from '../../api_request/api'
 
 function ContainerTourCatalog(props) {
   useEffect(() => {
+    document.title = 'Поиск попутчиков, туров, искать друзей для путешествия'
     // Вызываем загрузку туров при монтировании компонента
     props.getToursCatalog()
   }, [])
@@ -19,6 +20,8 @@ function ContainerTourCatalog(props) {
         fetchFavoriteTours={props.fetchFavoriteTours}
         countFavoriteTours={props.countFavoriteTours}
         favoriteTourCounts={props.favoriteTourCounts}
+        isAuthenticated={props.isAuthenticated}
+        vip={props.vip}
       />
     </div>
   )
@@ -28,8 +31,10 @@ let mapStateToProps = (state) => {
   return {
     toursItem: state.tours.toursItem,
     loginUserId: state.user.dataUser.userId,
+    vip: state.user.dataUser.vip,
     favorites: state.tours.favorites,
     favoriteTourCounts: state.tours.favoriteTourCounts,
+    isAuthenticated: state.user.isAuthenticated,
   }
 }
 

@@ -6,8 +6,16 @@ import iconHealtNo from '../../../assets/images/cartTours/icon-favorite-no.png'
 import { addTourFavoriteUser, delTourFavoriteUser } from '../../../api_request/api'
 
 export default function WishLinkItemToursCartList(props) {
-  const { loginUserId, tourId, isFavorite, favoriteTourCounts, toursItem, countFavoriteTours, fetchFavoriteTours } =
-    props
+  const {
+    loginUserId,
+    tourId,
+    isFavorite,
+    favoriteTourCounts,
+    toursItem,
+    countFavoriteTours,
+    fetchFavoriteTours,
+    isAuthenticated,
+  } = props
   const [count, setCount] = useState(favoriteTourCounts) // Используем useState для отслеживания количества
 
   useEffect(() => {
@@ -63,27 +71,35 @@ export default function WishLinkItemToursCartList(props) {
   //     .catch((error) => {
   //       console.error('Error del tour to favorites:', error)
   //     })
-  // }
+  // } isAuthenticated
 
   return (
     <div className={s.linkWishGridItemTours}>
-      <div className={s.linkItemTours}>
-        {isFavorite ? (
-          <Link onClick={delTour} to='#'>
-            <div className={s.blockIhave}>
-              <img src={iconHealt} alt='' />
-              <span className={s.numberWish}>{count}</span>
-            </div>
-          </Link>
-        ) : (
-          <Link onClick={addTour} to='#'>
-            <div className={s.blockIhave}>
-              <img src={iconHealtNo} alt='' />
-              <span className={s.numberWish}>{count}</span>
-            </div>
-          </Link>
-        )}
-      </div>
+      {isAuthenticated ? (
+        <div className={s.linkItemTours}>
+          {isFavorite ? (
+            <Link onClick={delTour} to='#'>
+              <div className={s.blockIhave}>
+                <img src={iconHealt} alt='' />
+                <span className={s.numberWish}>{count}</span>
+              </div>
+            </Link>
+          ) : (
+            <Link onClick={addTour} to='#'>
+              <div className={s.blockIhave}>
+                <img src={iconHealtNo} alt='' />
+                <span className={s.numberWish}>{count}</span>
+              </div>
+            </Link>
+          )}
+        </div>
+      ) : (
+        <div className={s.linkItemTours}>
+          <div className={s.noAuthWishLink}>
+            <span className={s.numberWish}>Уже понравилось {count} участникам</span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

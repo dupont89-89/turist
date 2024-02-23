@@ -55,6 +55,7 @@ export default function CartTourCatalog(props) {
           favoriteTourCounts={props.countfavoriteTourCounts}
           toursItem={props.toursItem}
           countFavoriteTours={props.countFavoriteTours}
+          isAuthenticated={props.isAuthenticated}
         />
         <ButtonItemToursCartList />
       </div>

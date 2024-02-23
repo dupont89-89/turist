@@ -3,12 +3,9 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const config = require('./config/config')
 const touristRoutes = require('./routes/touristRoutes')
-const session = require('express-session')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
 const userRoutes = require('./routes/userRoutes')
-const https = require('https')
-const fs = require('fs')
 
 const app = express()
 
@@ -47,21 +44,11 @@ mongoose
     console.error('Error connecting to MongoDB:', error)
   })
 
-app.use('/tours', touristRoutes)
-app.use('/user', userRoutes)
+app.use('api/tours', touristRoutes)
+app.use('api/user', userRoutes)
 
 const PORT = config.PORT
 
-// Пути к вашим SSL-сертификатам
-const options = {
-  key: fs.readFileSync('ssl/key.pem'),
-  cert: fs.readFileSync('ssl/cert.pem'),
-  passphrase: 'pegast1QAZ2wsx',
-}
-
-// Создайте HTTPS-сервер, передав опции
-const server = https.createServer(options, app)
-
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`App is listening on port ${PORT}`)
 })

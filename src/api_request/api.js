@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { setAllDataUser, setDataUser } from '../redux/user-reducer/user-reducer'
-import { setDataCountFavoriteTours, setDataFavoriteTours, setFavoriteTour } from '../redux/tour-reducer/tour-reducer'
+import { setDataCountFavoriteTours, setDataFavoriteTours } from '../redux/tour-reducer/tour-reducer'
 
 const instance = axios.create({
-  baseURL: 'https://localhost:5000',
+  baseURL: 'http://localhost:5000/api',
   withCredentials: true, // Если вам нужно использовать куки или авторизацию с сервером
 })
 

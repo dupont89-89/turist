@@ -271,3 +271,10 @@
     font-size: 13px;
     color: #626262;
 }
+
+.noAuthWishLink {
+    background-color: #d1ebff;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}

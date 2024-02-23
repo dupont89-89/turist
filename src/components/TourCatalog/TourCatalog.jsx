@@ -4,6 +4,9 @@ import s from './TourCatalog.module.css'
 import CartTourCatalog from '../CartTour/CartTourCatalog'
 import { calculateAge } from '../../function/userAge'
 import { Link } from 'react-router-dom'
+import ButtonMinIcon from '../Buttons/ButtonMinIcon'
+import vipIcon from '../../assets/images/icon/button/vip.png'
+import poryadokIcon from '../../assets/images/icon/button/free-icon-workflow-6020301.png'
 
 export default function TourCatalog({
   toursItem,
@@ -12,6 +15,8 @@ export default function TourCatalog({
   favorites,
   loginUserId,
   favoriteTourCounts,
+  isAuthenticated,
+  vip,
 }) {
   // const { fetchFavoriteTours, favorites, loginUserId, favoriteTourCounts } = props;
   const [isReversed, setIsReversed] = useState(false)
@@ -124,6 +129,7 @@ export default function TourCatalog({
         countfavoriteTourCounts={countfavoriteTourCounts}
         toursItem={toursItem}
         countFavoriteTours={countFavoriteTours}
+        isAuthenticated={isAuthenticated}
       />
     )
   })
@@ -131,20 +137,30 @@ export default function TourCatalog({
   return (
     <div className={s.contentCartTours}>
       <div className={s.itemCartTours}>
-        <div className={s.blockFiltrBtn} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <span className={`${s.btnPoryadok}`}>
-            <Link to='#'>Порядок отображения</Link>
-          </span>
-          {isHovered && (
-            <div className={s.podMenuPorydok}>
-              <Link onClick={toogleButtonNormal}>
-                <span className={`${isReversed ? '' : s.hovered}`}>По дате добавления</span>
+        <div className={s.buttonHeadListTour}>
+          {!vip ? (
+            <ButtonMinIcon link='/add-vip/' icon={vipIcon} backColor='#1e5b9f' textColor='#fff'>
+              Получить VIP
+            </ButtonMinIcon>
+          ) : null}
+          <div className={s.blockFiltrBtn} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <span className={`${s.btnPoryadok}`}>
+              <Link to='#dataTour'>
+                <img className={s.imgIconButton} src={poryadokIcon} alt='Порядок отображения' />
+                <span>Порядок туров</span>
               </Link>
-              <Link onClick={toogleButtonReverse}>
-                <span className={`${isReversed ? s.hovered : ''}`}>Показать новые</span>
-              </Link>
-            </div>
-          )}
+            </span>
+            {isHovered && (
+              <div className={s.podMenuPorydok}>
+                <Link to='#maxData' onClick={toogleButtonNormal}>
+                  <span className={`${isReversed ? '' : s.hovered}`}>По дате добавления</span>
+                </Link>
+                <Link to='#minData' onClick={toogleButtonReverse}>
+                  <span className={`${isReversed ? s.hovered : ''}`}>Показать новые</span>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
         {tours}
       </div>

@@ -10,17 +10,14 @@
 }
 
 .blockFiltrBtn {
-    display: inline;
-    width: 180px;
+    display: inline-block;
     position: relative;
     z-index: 2;
-    background-color: #ffffff;
 }
 
 .hovered {
-    background-color: #2a87d0;
-    color: #fff;
-    padding: 3px 5px;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 .podMenuPorydok {
@@ -31,26 +28,51 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 25px;
+    top: 30px;
 }
 
 .podMenuPorydok a {
     text-align: left;
 }
 
-.podMenuPorydok a,
 .btnPoryadok a {
-    width: 100%;
-    display: block;
-    font-size: 1rem;
-    color: #444;
+    display: flex;
+    color: #ffffff;
     padding: 5px 9px;
-}
-
-.btnPoryadok a {
-    background-color: #ffffff;
+    text-align: center;
+    line-height: 0px;
+    border-radius: 5px;
+    background-color: #2580c9;
+    align-items: center;
+    justify-content: center;
 }
 
 .podMenuPorydok a {
-    background-color: #aad9ff;
+    width: 100%;
+    display: inline-block;
+    font-size: 1rem;
+    color: #ffffff;
+    padding: 5px 9px;
+    text-align: center;
+    line-height: 20px;
+}
+
+/* .btnPoryadok a {
+    background-color: #ffffff;
+} */
+
+.podMenuPorydok a {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.buttonHeadListTour {
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 190px));
+}
+
+.imgIconButton {
+    width: 20px;
+    margin-right: 10px;
 }
