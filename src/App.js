@@ -13,6 +13,7 @@ import TourustProfileContainer from './components/UserProfile/TourustProfileCont
 import UserPageContainer from './components/UserPage/UserPageContainer'
 import SidebarMenu from './components/Sidebar/SidebarMenu'
 import AddVipUserContainer from './components/UserProfile/VipStatus/AddVipUserContainer'
+import { establishWebSocketConnection } from './components/Auth/UserStatus/UserStatus'
 
 function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavoriteTours }) {
   const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
@@ -29,9 +30,10 @@ function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavori
       // getUser(userId)
       getUser(userId)
       fetchFavoriteTours(userId)
+      establishWebSocketConnection()
     }
     setIsLoading(false)
-  }, [isAuthenticated])
+  }, [])
 
   if (isLoading) {
     // Если данные еще загружаются, можно показать прелоадер

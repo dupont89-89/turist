@@ -3,7 +3,7 @@ import React from 'react'
 
 VKID.Config.set({
   app: 51850369, // Идентификатор приложения.
-  redirectUrl: 'https://localhost', // Адрес для перехода после авторизации.
+  redirectUrl: 'https://app-travel.ru', // Адрес для перехода после авторизации.
 })
 
 export default function SignInVk() {

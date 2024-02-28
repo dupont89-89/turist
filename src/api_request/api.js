@@ -147,3 +147,17 @@ export const countFavoriteTours = (tourIdsArray) => {
     }
   }
 }
+
+export const updateStatus = (userId, isOnline) => {
+  debugger
+  return async (dispatch) => {
+    try {
+      await instance.post(`/user/set-status`, { userId, isOnline })
+      debugger
+      // dispatch(setDataCountFavoriteTours(countTours))
+    } catch (error) {
+      // Handle errors here, e.g., dispatch an error action
+      console.error('Ошибка статуса онлайн-офлайн:', error)
+    }
+  }
+}

@@ -112,3 +112,26 @@ exports.getAllUsers = async (req, res) => {
     res.status(500).send('Something Went Wrong')
   }
 }
+
+exports.setUserStatus = async (req, res) => {
+  const { userId, isOnline } = req.body
+
+  try {
+    // Найдем пользователя по userId
+    const user = await User.findById(userId)
+
+    // Если пользователь не найден, вернем ошибку
+    if (!user) {
+      return res.status(404).json({ message: 'Пользователь не найден' })
+    }
+
+    // Обновим статус пользователя
+    user.isOnline = isOnline
+    await user.save()
+
+    return res.status(200).json({ message: 'Статус пользователя успешно обновлен' })
+  } catch (error) {
+    console.error('Ошибка при обновлении статуса пользователя:', error)
+    return res.status(500).json({ message: 'Произошла ошибка при обновлении статуса пользователя' })
+  }
+}

@@ -6,6 +6,7 @@ const touristRoutes = require('./routes/touristRoutes')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
 const userRoutes = require('./routes/userRoutes')
+const createWebSocketServer = require('./websocketServer/websocketServer')
 
 const app = express()
 
@@ -23,7 +24,7 @@ app.use(
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', config.CLIENT_ORIGIN)
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH') // Добавьте PATCH
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   next()
@@ -44,11 +45,13 @@ mongoose
     console.error('Error connecting to MongoDB:', error)
   })
 
-app.use('api/tours', touristRoutes)
-app.use('api/user', userRoutes)
+app.use('/api/tours', touristRoutes)
+app.use('/api/user', userRoutes)
 
 const PORT = config.PORT
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`App is listening on port ${PORT}`)
 })
+
+createWebSocketServer(server)

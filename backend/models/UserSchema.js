@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   avatar: { type: String },
   age: { type: Date },
   subscription: { type: Boolean },
-  sity: { type: String },
+  city: { type: String }, // Исправлено: было sity, изменено на city
   tel: { type: String },
   socialNetwork: [
     {
@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
     },
   ],
   vip: { type: Boolean },
+  isOnline: { type: Boolean, default: false }, // Добавляем поле для статуса онлайн
 })
 
 userSchema.methods.generateAuthToken = function () {
@@ -28,6 +29,16 @@ userSchema.methods.generateAuthToken = function () {
     expiresIn: '7d',
   })
   return token
+}
+
+// Функция для установки статуса пользователя "онлайн"
+userSchema.methods.setOnline = function () {
+  this.isOnline = true
+}
+
+// Функция для установки статуса пользователя "офлайн"
+userSchema.methods.setOffline = function () {
+  this.isOnline = false
 }
 
 const User = mongoose.model('user', userSchema)
