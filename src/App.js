@@ -1,28 +1,36 @@
-import { Route, Routes, Navigate } from 'react-router-dom' // Импорт Route и Routes
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import ContainerTourCatalog from './components/TourCatalog/ContainerTourCatalog'
 import SignUp from './components/Auth/SignUp/SignUp'
 import './App.css'
 import LoginContainer from './components/Auth/Login/LoginContainer'
-import { connect } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { setAuthSuccess, updateUserOnlineStatus } from './redux/user-reducer/user-reducer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import { fetchFavoriteTours, getAllUser, getUser } from './api_request/api'
+import SidebarMenu from './components/Sidebar/SidebarMenu'
 import NewToursContainer from './components/NewTours/NewToursContainer'
 import TourustProfileContainer from './components/UserProfile/TourustProfileContainer'
-import UserPageContainer from './components/UserPage/UserPageContainer'
-import SidebarMenu from './components/Sidebar/SidebarMenu'
 import AddVipUserContainer from './components/UserProfile/VipStatus/AddVipUserContainer'
+import UserPageContainer from './components/UserPage/UserPageContainer'
 import { establishWebSocketConnection } from './components/Auth/UserStatus/UserStatus'
+import { setAuthSuccess, updateUserOnlineStatus } from './redux/user-reducer/user-reducer'
+import { fetchFavoriteTours, getAllUser, getUser } from './api_request/api'
 import { getToursCatalog } from './redux/tour-reducer/tour-reducer'
 
-function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavoriteTours, updateUserOnlineStatus }) {
-  const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
+function App({
+  setAuthSuccess,
+  getUser,
+  isAuthenticated,
+  getAllUser,
+  fetchFavoriteTours,
+  updateUserOnlineStatus,
+  allUser,
+}) {
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true) // Устанавливаем isLoading в true перед началом загрузки данных
+        setIsLoading(true)
         const userId = JSON.parse(localStorage.getItem('userId'))
         if (userId) {
           setAuthSuccess()
@@ -36,7 +44,7 @@ function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavori
       } catch (error) {
         console.error('Error fetching data:', error)
       } finally {
-        setIsLoading(false) // Устанавливаем isLoading в false после завершения загрузки данных (в том числе в случае ошибки)
+        setIsLoading(false)
       }
     }
 
@@ -44,7 +52,6 @@ function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavori
   }, [isAuthenticated, getAllUser, getUser, fetchFavoriteTours, setAuthSuccess, updateUserOnlineStatus])
 
   if (isLoading) {
-    // Если данные еще загружаются, можно показать прелоадер
     return <div>Загрузка...</div>
   }
 
@@ -57,7 +64,7 @@ function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavori
             <div className='sidebarGridBlock'>
               <SidebarMenu />
             </div>
-            <div className='contenGridBlock'>
+            <div className='contentGridBlock'>
               <Routes>
                 {isAuthenticated && <Route path='newtours/' exact element={<NewToursContainer />} />}
                 {isAuthenticated && <Route path='edit-profile/' exact element={<TourustProfileContainer />} />}
@@ -88,9 +95,10 @@ const mapDispatchToProps = {
   getToursCatalog,
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.user.isAuthenticated,
+    allUser: state.user.allUser,
   }
 }
 

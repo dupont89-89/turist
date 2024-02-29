@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setAllDataUser, setDataUser } from '../redux/user-reducer/user-reducer'
+import { setAllDataUser, setDataUser, updateUserOnlineStatus } from '../redux/user-reducer/user-reducer'
 import { setDataCountFavoriteTours, setDataFavoriteTours } from '../redux/tour-reducer/tour-reducer'
 
 const instance = axios.create({

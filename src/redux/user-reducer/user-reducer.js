@@ -13,7 +13,7 @@ export const setDataUser = (dataUser) => ({
 
 export const setAllDataUser = (allUser) => ({
   type: ACTION_ALL_USER_DATA,
-  allUser: { ...allUser }, // Глубокое копирование allUser
+  allUser: [...allUser], // Глубокое копирование массива allUser
 })
 
 export const setAuthSuccess = () => ({
@@ -59,7 +59,7 @@ const userReducer = (state = initialState, action) => {
     case ACTION_ALL_USER_DATA:
       return {
         ...state,
-        allUser: { ...action.allUser }, // Глубокое копирование action.allUser
+        allUser: [...action.allUser], // Сохраняем как массив
       }
     case SET_AUTH_SUCCESS:
       return {
@@ -79,6 +79,7 @@ const userReducer = (state = initialState, action) => {
           ...state,
           allUser: state.allUser.map((user) => {
             if (user._id === action.payload.userId) {
+              debugger
               return {
                 ...user,
                 isOnline: action.payload.isOnline,
