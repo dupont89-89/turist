@@ -14,24 +14,34 @@ import UserPageContainer from './components/UserPage/UserPageContainer'
 import SidebarMenu from './components/Sidebar/SidebarMenu'
 import AddVipUserContainer from './components/UserProfile/VipStatus/AddVipUserContainer'
 import { establishWebSocketConnection } from './components/Auth/UserStatus/UserStatus'
+import { getToursCatalog } from './redux/tour-reducer/tour-reducer'
 
 function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavoriteTours, updateUserOnlineStatus }) {
   const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = JSON.parse(localStorage.getItem('userId'))
-      if (userId) {
-        setAuthSuccess()
-        await establishWebSocketConnection()
-        await Promise.all([getAllUser(), getUser(userId), fetchFavoriteTours(userId)])
-        updateUserOnlineStatus(userId, true)
-        setIsLoading(false)
+      try {
+        setIsLoading(true) // Устанавливаем isLoading в true перед началом загрузки данных
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        if (userId) {
+          setAuthSuccess()
+        }
+        if (isAuthenticated) {
+          await Promise.all([establishWebSocketConnection(), getAllUser(), fetchFavoriteTours(userId), getUser(userId)])
+          updateUserOnlineStatus(userId, true)
+        } else {
+          await getAllUser()
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
+        setIsLoading(false) // Устанавливаем isLoading в false после завершения загрузки данных (в том числе в случае ошибки)
       }
     }
 
     fetchData()
-  }, [])
+  }, [isAuthenticated, getAllUser, getUser, fetchFavoriteTours, setAuthSuccess, updateUserOnlineStatus])
 
   if (isLoading) {
     // Если данные еще загружаются, можно показать прелоадер
@@ -75,6 +85,7 @@ const mapDispatchToProps = {
   getAllUser,
   fetchFavoriteTours,
   updateUserOnlineStatus,
+  getToursCatalog,
 }
 
 let mapStateToProps = (state) => {

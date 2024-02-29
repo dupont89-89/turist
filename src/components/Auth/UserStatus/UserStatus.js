@@ -13,10 +13,12 @@ export function establishWebSocketConnection() {
   }
 
   ws.onclose = function () {
+    debugger
     console.log('Соединение с WebSocket закрыто.')
   }
 
   ws.onerror = function (error) {
     console.error('Ошибка WebSocket:', error)
   }
+  return ws
 }
