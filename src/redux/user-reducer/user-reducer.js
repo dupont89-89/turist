@@ -4,6 +4,7 @@ const ACTION_USER_DATA = 'ACTION_USER_DATA'
 const ACTION_ALL_USER_DATA = 'ACTION_ALL_USER_DATA'
 const SET_AUTH_SUCCESS = 'SET_AUTH_SUCCESS'
 const LOGOUT = 'LOGOUT'
+const UPDATE_USER_ONLINE_STATUS = 'UPDATE_USER_ONLINE_STATUS'
 
 export const setDataUser = (dataUser) => ({
   type: ACTION_USER_DATA,
@@ -21,6 +22,11 @@ export const setAuthSuccess = () => ({
 
 export const logout = () => ({
   type: LOGOUT,
+})
+
+export const updateUserOnlineStatus = (userId, isOnline) => ({
+  type: UPDATE_USER_ONLINE_STATUS,
+  payload: { userId, isOnline },
 })
 
 export const logoutUserThunkCreator = () => {
@@ -65,6 +71,25 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
         dataUser: { ...initialState.dataUser }, // Восстановление начального состояния dataUser
+      }
+    case UPDATE_USER_ONLINE_STATUS:
+      // Проверяем, что allUser существует и является массивом
+      if (state.allUser && Array.isArray(state.allUser)) {
+        return {
+          ...state,
+          allUser: state.allUser.map((user) => {
+            if (user._id === action.payload.userId) {
+              return {
+                ...user,
+                isOnline: action.payload.isOnline,
+              }
+            }
+            return user
+          }),
+        }
+      } else {
+        // Если allUser не существует или не является массивом, возвращаем исходное состояние
+        return state
       }
     default:
       return state

@@ -4,7 +4,6 @@ export function establishWebSocketConnection() {
 
   ws.onopen = function () {
     console.log('Соединение с WebSocket установлено.')
-
     const message = { userId: userId, isOnline: true }
     ws.send(JSON.stringify(message))
   }

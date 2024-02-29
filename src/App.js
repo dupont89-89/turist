@@ -5,7 +5,7 @@ import './App.css'
 import LoginContainer from './components/Auth/Login/LoginContainer'
 import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { setAuthSuccess } from './redux/user-reducer/user-reducer'
+import { setAuthSuccess, updateUserOnlineStatus } from './redux/user-reducer/user-reducer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import { fetchFavoriteTours, getAllUser, getUser } from './api_request/api'
 import NewToursContainer from './components/NewTours/NewToursContainer'
@@ -15,24 +15,22 @@ import SidebarMenu from './components/Sidebar/SidebarMenu'
 import AddVipUserContainer from './components/UserProfile/VipStatus/AddVipUserContainer'
 import { establishWebSocketConnection } from './components/Auth/UserStatus/UserStatus'
 
-function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavoriteTours }) {
+function App({ setAuthSuccess, getUser, isAuthenticated, getAllUser, fetchFavoriteTours, updateUserOnlineStatus }) {
   const [isLoading, setIsLoading] = useState(true) // Добавим состояние для отслеживания загрузки
 
   useEffect(() => {
-    // Попытка получить данные пользователя из localStorage при инициализации приложения
-    // const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    getAllUser()
-    const userId = JSON.parse(localStorage.getItem('userId'))
-    if (userId) {
-      // Сохраняем данные пользователя в Redux-состоянии
-      // setDataUser(storedUserData);
-      setAuthSuccess()
-      // getUser(userId)
-      getUser(userId)
-      fetchFavoriteTours(userId)
-      establishWebSocketConnection()
+    const fetchData = async () => {
+      const userId = JSON.parse(localStorage.getItem('userId'))
+      if (userId) {
+        setAuthSuccess()
+        await establishWebSocketConnection()
+        await Promise.all([getAllUser(), getUser(userId), fetchFavoriteTours(userId)])
+        updateUserOnlineStatus(userId, true)
+        setIsLoading(false)
+      }
     }
-    setIsLoading(false)
+
+    fetchData()
   }, [])
 
   if (isLoading) {
@@ -76,6 +74,7 @@ const mapDispatchToProps = {
   getUser,
   getAllUser,
   fetchFavoriteTours,
+  updateUserOnlineStatus,
 }
 
 let mapStateToProps = (state) => {

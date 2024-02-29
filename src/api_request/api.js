@@ -46,7 +46,7 @@ export const getAllUser = () => {
       const response = await instance.get('/user/get-all-user')
       const allUser = response.data
       // Dispatch the setDataUser action to update the user data in the Redux store
-      dispatch(setAllDataUser(allUser))
+      dispatch(setAllDataUser(Object.values(allUser)))
       return response.data
     } catch (error) {
       // Handle errors here, e.g., dispatch an error action
@@ -148,16 +148,16 @@ export const countFavoriteTours = (tourIdsArray) => {
   }
 }
 
-export const updateStatus = (userId, isOnline) => {
-  debugger
-  return async (dispatch) => {
-    try {
-      await instance.post(`/user/set-status`, { userId, isOnline })
-      debugger
-      // dispatch(setDataCountFavoriteTours(countTours))
-    } catch (error) {
-      // Handle errors here, e.g., dispatch an error action
-      console.error('Ошибка статуса онлайн-офлайн:', error)
-    }
-  }
-}
+// export const updateStatus = (userId, isOnline) => {
+//   debugger
+//   return async (dispatch) => {
+//     try {
+//       await instance.post(`/user/set-status`, { userId, isOnline })
+//       debugger
+//       // dispatch(setDataCountFavoriteTours(countTours))
+//     } catch (error) {
+//       // Handle errors here, e.g., dispatch an error action
+//       console.error('Ошибка статуса онлайн-офлайн:', error)
+//     }
+//   }
+// }
