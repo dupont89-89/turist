@@ -79,7 +79,6 @@ const userReducer = (state = initialState, action) => {
           ...state,
           allUser: state.allUser.map((user) => {
             if (user._id === action.payload.userId) {
-              debugger
               return {
                 ...user,
                 isOnline: action.payload.isOnline,

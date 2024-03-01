@@ -1,10 +1,13 @@
 import axios from 'axios'
-import { setAllDataUser, setDataUser, updateUserOnlineStatus } from '../redux/user-reducer/user-reducer'
+import { setAllDataUser, setDataUser } from '../redux/user-reducer/user-reducer'
 import { setDataCountFavoriteTours, setDataFavoriteTours } from '../redux/tour-reducer/tour-reducer'
+const config = require('./../config')
+
+const baseURL = `${config.SERVER_URL}:${config.PORT}/api`
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api',
-  withCredentials: true, // Если вам нужно использовать куки или авторизацию с сервером
+  baseURL: baseURL,
+  withCredentials: true,
 })
 
 export const getSity = async () => {
@@ -147,17 +150,3 @@ export const countFavoriteTours = (tourIdsArray) => {
     }
   }
 }
-
-// export const updateStatus = (userId, isOnline) => {
-//   debugger
-//   return async (dispatch) => {
-//     try {
-//       await instance.post(`/user/set-status`, { userId, isOnline })
-//       debugger
-//       // dispatch(setDataCountFavoriteTours(countTours))
-//     } catch (error) {
-//       // Handle errors here, e.g., dispatch an error action
-//       console.error('Ошибка статуса онлайн-офлайн:', error)
-//     }
-//   }
-// }

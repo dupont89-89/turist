@@ -89,6 +89,7 @@ export default function TourCatalog({
     const firstName = user ? user.firstName : ''
     const sity = user ? user.sity : ''
     const vip = user.vip
+    const isOnline = user.isOnline
     let age = calculateAge(user.age)
 
     let isFavorite = favorites.some((favorite) => favorite.userId === loginUserId && favorite.tourId === tour._id)
@@ -130,6 +131,7 @@ export default function TourCatalog({
         toursItem={toursItem}
         countFavoriteTours={countFavoriteTours}
         isAuthenticated={isAuthenticated}
+        isOnline={isOnline}
       />
     )
   })

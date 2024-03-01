@@ -13,6 +13,7 @@ import IconSearchUsersToursCartList from './CartTourElements/IconSearchUsersTour
 import WishLinkItemToursCartList from './CartTourElements/WishLinkItemToursCartList'
 import TagUser from './CartTourElements/TagUser'
 import DataAddToursCartLIst from './CartTourElements/DataAddToursCartLIst'
+import CartUserOnlineStatus from '../UserProfile/OnlineStatus/CartUserOnlineStatus'
 
 export default function CartTourCatalog(props) {
   return (
@@ -23,6 +24,7 @@ export default function CartTourCatalog(props) {
       <div className={s.descriptionCartBlock}>
         <div className={s.leftBlockCartList}>
           <AvatarUserCartList vip={props.vip} avatar={props.avatar} />
+          <CartUserOnlineStatus isOnline={props.isOnline} />
           <IconSearchUsersToursCartList looking={props.looking} />
         </div>
         <div className={s.rightBlockCartList}>

@@ -1,0 +1,19 @@
+.blockOnlineStatus {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.blockOnlineStatus .userCartOnlineStatus {
+    font-size: 0.875rem;
+}
+
+.iconStatusOnline img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.iconStatusOnline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
